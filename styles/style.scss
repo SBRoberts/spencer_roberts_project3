@@ -1,0 +1,32 @@
+@import './partials/setup';
+
+$highlight: crimson;
+$darkShade: #333;
+$lightShade: silver;
+
+body{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+}
+#gameWindow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $darkShade;
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem 2rem;
+    svg{
+        max-width: 100vmax;
+        max-height: 100%;
+    }
+}
+.region {
+    fill: silver;
+    z-index: 100;
+    transition: fill .2s ease-in-out;
+    &:hover{
+        fill: crimson;
+    }
+}
