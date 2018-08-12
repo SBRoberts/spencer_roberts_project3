@@ -1,0 +1,43 @@
+// Region structure
+// 1. status: clean, infected, dead
+// 2. afflictions - object with affliction bools - changes randomly as world event
+// 3. services and infrastructure - bools - chages based on core props
+// 4. government affairs - bool - changes more randomly if % of infected
+// 5. population - changes each tick
+//     0. healthy
+//     1. infected
+//     2. dead
+//     3. alive
+
+// When something is purchased
+// 1. reduce currency
+// 2. change modifier to true
+// 3. call the core props calc function | determines the value change from each modifier
+//      (oh boy...)
+// 4. call the world update function | 
+
+// Every tick
+// 1. scan each region
+// 1.1.connectedRegions
+//     - if transmission method is active && infection rate is sufficiant, chance to change
+//         - code: app.country.connectedRegions.forEach(region) -> chance to change app[region].status
+// 1.2. calculate the number of people infected
+//     - percentage of total uninfected people
+//     - subtract that number from uninfected people
+//     - move uninfected region to infected region list
+//     - give x evoPts for per y % of people infected in a region
+// 1.3. calculate the number of people killed
+//     - function of lethality and % infected ppl in region - only activates if lethaity is over a certain level
+//     - move infected region to forsaken region list if prudent
+//     - give x evoPts for per y % of people killed in a region
+// 2. calculate vaccine status
+//     - arguably most complicated part
+//     ~~ for hospitals ~~
+//     - scan each infected country to calculate the number of total and active hospitals
+//         - a hospital is false if x % of people are infected && y % percent of people are dead
+//     - vaccine completion && deployment
+//         - does not start until visibility is over a certain level
+//         - number of active hospitals, visibility && lethality increases completion rate
+//         - when completion rate reaches 100, start deployment
+//         - when deployment reaches 100 the user gets 10 days to try to win.
+
