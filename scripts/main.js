@@ -12,15 +12,17 @@ const regionAfflicOnDom = regionInfo.find('.afflictions')
 const regionGovOnDom = regionInfo.find('.government-affairs')
 const regionInfraOnDom = regionInfo.find('.services-infrastructure')
 
+// MAIN DISEASE OBJECT
+// REMAINS MUTABLE
 app.disease = {
     info: {
         evoPts: 10000,
-        avgInfections: 10,
+        avgInfections: 0,
         avgDeaths: 0,
     },
     coreProps: {
-        lethality: 10,
-        infectivity: 10,
+        lethality: 1,
+        infectivity: 5,
         visibility: 10,
     },
     modifiers: {
@@ -63,6 +65,8 @@ app.disease = {
     }
 }
 
+// MAIN WORLD OBJECT - REPRESENTS GAMEBOARD
+// REMAINS MUTABLE TO KEEP TRACK OF GAME STATE
 app.world = {
     info:{
         alivePop: 0,
@@ -84,16 +88,13 @@ app.world = {
         // console.log(app.world.info.deadPop);
         
 
-    }, 50),
+    }, 500),
 }
+// A global variable for my world info obj, because I seem to use it a lot
 const worldInfo = app.world.info;
 
-// update disease info
-// diseaseStatsEvoPts.empty()
-// console.log($(diseaseStatsEvoPts))
-$(diseaseStatsEvoPts).append(`<h4>Evolution Points: <span class="">${worldInfo.evoPts}</span> </h4>`)
-
-
+// MAIN REGIONS ARRAY
+// REMAINS MUTABLE TO ALLOW FOR UNIVERAL CHANGES (like when an item is purchased)
 app.regions = [ 
     // 21 - Total
     // Americas
@@ -936,7 +937,10 @@ const chanceRoll = (d) => {
     return success;
 }
 
+// MAIN CLOCK FOR GAME
+// THIS FUNCTION DICTATES 
 app.regionUpdate = () => {
+    // for every region
     app.regions.forEach((region) => {
         const regionPop = region.population;
 
@@ -1040,30 +1044,30 @@ $('.region').on('click', function(){
             }
 
             // get region government-affairs status on dom - style for true or false
-            for (let gov in region.government) {
+            for (let item in region.government) {
 
                 // format text for each option (ugh)
-                if(gov === "noWater"){
+                if(item === "noWater"){
                     regionGovOnDom.find('ul').append(`<li>Not handing out water</li>`)
                 } 
-                if (gov === "noMasks") {
+                if (item === "noMasks") {
                     regionGovOnDom.find('ul').append(`<li>Not handing out masks</li>`)
                 }
-                if (gov === "rodentsExterm") {
+                if (item === "rodentsExterm") {
                     regionGovOnDom.find('ul').append(`<li>Not exerminating rodents</li>`)
                 }
-                if (gov === "curfew") {
+                if (item === "curfew") {
                     regionGovOnDom.find('ul').append(`<li>Curfews are not enforced</li>`)
                 }
-                if (gov === "martialLaw") {
+                if (item === "martialLaw") {
                     regionGovOnDom.find('ul').append(`<li>Martial law not in effect</li>`)
                 }
-                if (gov === "cremation") {
+                if (item === "cremation") {
                     regionGovOnDom.find('ul').append(`<li>Dead bodies not being burned</li>`)
                 }
 
                 // styles if condition is true/false
-                if (region.government[gov] === true) {
+                if (region.government[item] === true) {
                     regionAfflicOnDom.find('li').css('color', 'blue')
                 } else {
                     regionAfflicOnDom.find('li').css('color', 'inherit')
@@ -1101,33 +1105,65 @@ $('.region').on('click', function(){
     });
 });
 
+// get all properties from an input object, find matching values in an target object & do math
+app.applyPurchase = (inputObj, targetObj, posNeg) => {
+    for (let prop in inputObj) {
+        if (targetObj[prop] !== undefined) {
+            targetObj[prop] += inputObj[prop] * posNeg
+            // console.log(targetObj)
+        }
+    }
+}
+
 // when a purchaseable item's button is sumbitted
-$('button').on('click', function(e){
+$('button').on('click', function(){
     let purchased = $(this).data("purchased")
-    // console.log(purchased)
     const buyCost = $(this).data("buy")
     const sellCost = $(this).data("sell")
     const allData = $(this).data()
-
-
+    
     // if item is not purchased, allow user to buy, check to see if they can afford it
-    if (purchased === false && app.disease.info.evoPts >= buyCost) {
-        // purchased = false;
+    if (!purchased && app.disease.info.evoPts >= buyCost) {
+        // get confirmation of action
         const confirmAct = confirm(`Cost to purchase: ${buyCost}`)
+
+        // if confirmAct true
         if (confirmAct) {
+
+            // update evolution pts
             app.disease.info.evoPts -= buyCost
+
+            // chnaged purchased attr to true
             $(this).data("purchased", true)
+
+            // update disease info
             app.updateDiseaseInfo()
-            console.log('BOUGHT', app.disease.info)
+
+            // applied purchased item's stats
+            app.applyPurchase(allData, app.disease.coreProps, 1)
+            console.log('BOUGHT')
+
         }
     // if item is  purchased, allow user to sell, check to see if they can afford it
     } else if (purchased && app.disease.info.evoPts >= sellCost){
+        // get confirmation of action
         const confirmAct = confirm(`Cost to sell: ${sellCost}`)
+
+        // if confirmAct true
         if (confirmAct) {
+            // update evolution pts
             app.disease.info.evoPts -= sellCost
+
+            // change purchased attr to true
             $(this).data("purchased", false)
+
+            // update disease info
             app.updateDiseaseInfo()
-            console.log('SOLD', app.disease.info)
+
+            // applied purchased item's stats ** subtract since we're selling
+            app.applyPurchase(allData, app.disease.coreProps, -1)
+
+            console.log('SOLD')
         }
     } else{
         alert("You can't afford this.")
@@ -1136,27 +1172,27 @@ $('button').on('click', function(e){
 });
 
 app.updateDiseaseInfo = () => {
-    $(".evolution-points").html(`<h4>${app.disease.info.evoPts}</h4>`)
+    $(".evolution-points").html(`<h4>Evolution Points: ${app.disease.info.evoPts}</h4>`)
 }
 
 app.updateOnTick = () => {
     // to ensure we are using a real number, add a delay w/ an if statement
     if (app.world.info.infectedPop > 1000){
-        $(".avg-infections").html(`<h4>${Math.floor(app.world.info.infectedPop / app.world.dayCount)}</h4>`)
-        $(".avg-deaths").html(`<h4>${Math.floor(app.world.info.deadPop / app.world.dayCount)}</h4>`)
+        $(".avg-infections").html(`<h4>Avg Infections/day: ${Math.floor(app.world.info.infectedPop / app.world.dayCount)}</h4>`)
+        $(".avg-deaths").html(`<h4>Avg Deaths/day: ${Math.floor(app.world.info.deadPop / app.world.dayCount)}</h4>`)
         // console.log(Math.floor(app.world.info.infectedPop / app.world.dayCount))
     }
 }
 
 
 app.init = () => {
-    app.forcePause()
-    // app.regionUpdate()
+    // app.forcePause()
+    app.regionUpdate()
+    app.updateDiseaseInfo()
 }
 
 $(function(){
     app.init()
-    app.updateDiseaseInfo()
 });
 
 // Region structure
