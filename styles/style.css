@@ -133,11 +133,19 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   box-sizing: border-box; }
 
 body {
+  position: relative;
   padding: 0;
   margin: 0;
   font-size: 20px; }
 
-#gameWindow {
+ul {
+  padding: 0;
+  list-style: none; }
+
+input[type="checkbox"] {
+  display: none; }
+
+#game-window {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -148,12 +156,29 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   background-color: #333;
-  width: 100vw;
+  max-width: 100vw;
   height: 100vh;
   padding: 2rem 2rem; }
-  #gameWindow svg {
+  #game-window svg {
     max-width: 100vmax;
     max-height: 100%; }
+
+.region-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  top: 0;
+  background-color: silver;
+  color: #333;
+  padding: 2rem; }
+  .region-info .region-name {
+    width: 100%; }
+  .region-info div {
+    width: 50%; }
 
 .region {
   fill: silver;
@@ -163,3 +188,44 @@ body {
   transition: fill .2s ease-in-out; }
   .region:hover {
     fill: crimson; }
+
+.disease-info label {
+  font-size: 40px; }
+
+.disease-info .disease-container {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height .3s;
+  -o-transition: height .3s;
+  transition: height .3s; }
+
+.disease-info input:checked + .disease-container {
+  height: 100%; }
+
+.disease-info div {
+  height: 100%; }
+
+.symptoms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  .symptoms .heading, .symptoms .container {
+    width: 100%; }
+  .symptoms .tier1, .symptoms .tier2, .symptoms .tier3 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%; }
+  .symptoms button {
+    padding: .25rem .5rem;
+    width: calc(100% / 6); }
+  .symptoms p {
+    margin: 0; }

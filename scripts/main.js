@@ -1,15 +1,27 @@
 const app = {};
 
+// disease window classes - DOM
+const diseaseContainer = $('.disease-container')
+const diseaseStats = diseaseContainer.find('disease-stats')
+const diseaseStatsEvoPts = diseaseStats.find('evolution-points')
+
+// region window classes - DOM
+const regionInfo = $('.region-info')
+const regionPopOnDom = regionInfo.find('.population')
+const regionAfflicOnDom = regionInfo.find('.afflictions')
+const regionGovOnDom = regionInfo.find('.government-affairs')
+const regionInfraOnDom = regionInfo.find('.services-infrastructure')
+
 app.disease = {
     info: {
-        evoPts: 20,
+        evoPts: 10000,
         avgInfections: 10,
         avgDeaths: 0,
     },
     coreProps: {
-        lethality: 0,
+        lethality: 10,
         infectivity: 10,
-        visibility: 0,
+        visibility: 10,
     },
     modifiers: {
         resistance: {
@@ -19,7 +31,7 @@ app.disease = {
             drug: 0,
         },
         transmission: {
-            airborne: false,
+            airborne: true,
             waterborne: false,
             rodent: false,
             insect: false,
@@ -52,17 +64,35 @@ app.disease = {
 }
 
 app.world = {
+    info:{
+        alivePop: 0,
+        deadPop: 0,
+        healthyPop: 0,
+        infectedPop: 0,
+    },
     dayTimer: 0,
     dayCount: 0,
     clock: setInterval(function () {
-        if (app.world.dayTimer === 60) {
+        if (app.world.dayTimer === 24) {
             app.world.dayCount++;
             app.world.dayTimer = 0;
         }
         app.world.dayTimer++;
+        app.regionUpdate()
+        app.updateOnTick()
         console.log(`Day Timer: ${app.world.dayTimer}, Day Count: ${app.world.dayCount}`)
-    }, 500),
+        // console.log(app.world.info.deadPop);
+        
+
+    }, 50),
 }
+const worldInfo = app.world.info;
+
+// update disease info
+// diseaseStatsEvoPts.empty()
+// console.log($(diseaseStatsEvoPts))
+$(diseaseStatsEvoPts).append(`<h4>Evolution Points: <span class="">${worldInfo.evoPts}</span> </h4>`)
+
 
 app.regions = [ 
     // 21 - Total
@@ -70,20 +100,18 @@ app.regions = [
     {
         name:"South America",
         status: "clean",
-        infectivity:0,
+        infectivity: 0,
         lethality: 0,
         visibility:0,
         population:{
-            healthy:422500000,
+            alive: 422500000,
             infected:0,
             dead:0,
-            alive: 0,
+            healthy: 0,
         },
         transmission:{
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture:{
             airports: true,
@@ -115,14 +143,12 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 42000000,
+            alive: 42000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
             airborne: false,
             waterborne: false,
         },
@@ -156,16 +182,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 579000000,
+            alive: 579000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -197,16 +221,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 15000000,
+            alive: 15000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            airborne: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -239,16 +261,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 66000000,
+            alive: 66000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -280,16 +300,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 397500000,
+            alive: 397500000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -321,16 +339,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 291900000,
+            alive: 291900000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -362,16 +378,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 21200000,
+            alive: 21200000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            insect: true,
         },
         infrastucture: {
             airports: true,
@@ -403,15 +417,15 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 56000,
+            alive: 56000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
             rodent: false,
             insect: false,
-            airborne: false,
+            airborne: true,
             waterborne: false,
         },
         infrastucture: {
@@ -445,16 +459,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 254400000,
+            alive: 254400000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -486,16 +498,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 105000000,
+            alive: 105000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -527,16 +537,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 1650850000,
+            alive: 1650850000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -568,16 +576,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 397500000,
+            alive: 397500000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -609,16 +615,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 127000000,
+            alive: 127000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -651,16 +655,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 367000000,
+            alive: 367000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -692,16 +694,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 434900000,
+            alive: 434900000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -733,16 +733,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 4750000,
+            alive: 4750000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            airborne: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -774,16 +772,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 66000000,
+            alive: 66000000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            insect: true,
         },
         infrastucture: {
             airports: true,
@@ -815,16 +811,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 24800000,
+            alive: 24800000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            waterborne: true,
         },
         infrastucture: {
             airports: true,
@@ -858,16 +852,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 41200000,
+            alive: 41200000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            insect: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -901,16 +893,14 @@ app.regions = [
         lethality: 0,
         visibility: 0,
         population: {
-            healthy: 144300000,
+            alive: 144300000,
             infected: 0,
             dead: 0,
-            alive: 0,
+            healthy: 0,
         },
         transmission: {
-            rodent: false,
-            insect: false,
-            airborne: false,
-            waterborne: false,
+            rodent: true,
+            airborne: true,
         },
         infrastucture: {
             airports: true,
@@ -937,22 +927,236 @@ app.regions = [
     },
 ]
 
-const forcePause = () => {
+app.forcePause = () => {
     clearInterval(app.world.clock)
 }
+// Helper Functions
+const chanceRoll = (d) => {
+    const success = Math.random() <= d;
+    return success;
+}
+
+app.regionUpdate = () => {
+    app.regions.forEach((region) => {
+        const regionPop = region.population;
+
+        // base region infectivity
+        region.infectivity = app.disease.coreProps.infectivity/100;
+
+        // base region lethality
+        region.lethality = app.disease.coreProps.lethality / 100;
+
+        // Expose region if one of the diseases transmission methods are found
+        for(activeTransmissionMethod in region.transmission){
+            if (region.transmission[activeTransmissionMethod] === true && region.transmission[activeTransmissionMethod] === app.disease.modifiers.transmission[activeTransmissionMethod] && region.status !== "infected"){
+                region.status = "exposed"
+                // console.log(region.status, region.name)
+            }
+        }
+        // chance to infect region
+        if (region.status === "exposed" && chanceRoll(region.infectivity)){
+            region.status = "infected"
+            console.log(region.status, region.name)
+        }
+        
+        if (region.status === "infected" && chanceRoll(region.infectivity)){
+            // GLOBAL TRAITS
+            // on every update reset to 0, then proceed
+            // worldInfo.alivePop, worldInfo.infectedPop, worldInfo.healthyPop, worldInfo.deadPop = 0;
+
+            // set alive population
+            worldInfo.alivePop += regionPop.alive;
+
+            // set healthy population
+            worldInfo.healthyPop += regionPop.healthy;
+
+            // set infected population
+            worldInfo.infectedPop += regionPop.infected;
+
+            // set global dead population
+            worldInfo.deadPop += regionPop.dead;
+
+            // REGION TRAITS
+            // set alive population
+
+            // set infected population
+            if (region.population.healthy > 0){
+                regionPop.infected += Math.floor(regionPop.healthy * (region.infectivity / 10000));
+                // region.population.infected += Math.floor(regionPop.healthy * (region.infectivity));
+                console.log(region.name, region.population)
+                
+            } else {
+                // set healthy population
+                regionPop.healthy = 0;
+                regionPop.healthy = regionPop.alive - regionPop.infected;
+            }
+
+
+        }
+        // set dead population
+        if (chanceRoll(region.lethality) && region.lethality >= .01 && regionPop.alive / regionPop.infected >= .01) {
+            // console.log(regionPop.infected / regionPop.healthy);
+            
+            regionPop.dead += Math.floor(regionPop.infected * (region.lethality))
+            regionPop.alive -= regionPop.dead;
+
+            // console.log('LuL @ ded PEEP <-------',regionPop.dead)
+        }
+    });
+}
+
+$('.region').on('click', function(){
+    let countryId = this.getAttribute("id").split('-').join(" ");
+
+    // empty .region-info on click
+    regionInfo.find('ul').empty()
+    regionInfo.find('.region-name').empty()
+    
+    // add region name to region-info div on click
+    regionInfo.find('.region-name').append(countryId)
+
+    // for the region I clicked on, iterate through all the regions and find me region whose name matches
+    app.regions.forEach((region) => {
+        if(region.name.toLowerCase() === countryId){
+
+            // get region population status on dom
+            for(let populus in region.population){
+                regionPopOnDom.find('ul').append(`
+                    <li>${populus} | ${region.population[populus]}</li>   
+                `)
+            }
+
+            // get region affliction status on dom - style for true or false
+            for (let afflictions in region.afflictions) {
+                regionAfflicOnDom.find('ul').append(`
+                    <li>${afflictions} are in effect</li>
+                `)
+
+                if (region.afflictions[afflictions] === true){
+                    regionAfflicOnDom.find('li').css('color', 'blue')
+                } else {
+                    regionAfflicOnDom.find('li').css('color', 'inherit')
+                }
+            }
+
+            // get region government-affairs status on dom - style for true or false
+            for (let gov in region.government) {
+
+                // format text for each option (ugh)
+                if(gov === "noWater"){
+                    regionGovOnDom.find('ul').append(`<li>Not handing out water</li>`)
+                } 
+                if (gov === "noMasks") {
+                    regionGovOnDom.find('ul').append(`<li>Not handing out masks</li>`)
+                }
+                if (gov === "rodentsExterm") {
+                    regionGovOnDom.find('ul').append(`<li>Not exerminating rodents</li>`)
+                }
+                if (gov === "curfew") {
+                    regionGovOnDom.find('ul').append(`<li>Curfews are not enforced</li>`)
+                }
+                if (gov === "martialLaw") {
+                    regionGovOnDom.find('ul').append(`<li>Martial law not in effect</li>`)
+                }
+                if (gov === "cremation") {
+                    regionGovOnDom.find('ul').append(`<li>Dead bodies not being burned</li>`)
+                }
+
+                // styles if condition is true/false
+                if (region.government[gov] === true) {
+                    regionAfflicOnDom.find('li').css('color', 'blue')
+                } else {
+                    regionAfflicOnDom.find('li').css('color', 'inherit')
+                }
+            }
+
+            // get region infrastructure status on dom - style for true or false
+            for (let thing in region.infrastucture) {
+
+                // format text for each option (ugh)
+                if (thing === "airports") {
+                    regionInfraOnDom.find('ul').append(`<li>Airports are open</li>`)
+                }
+                if (thing === "shipyards") {
+                    regionInfraOnDom.find('ul').append(`<li>Shipyards are open</li>`)
+                }
+                if (thing === "hospitals") {
+                    regionInfraOnDom.find('ul').append(`<li>Hospitals are open</li>`)
+                }
+                if (thing === "transit") {
+                    regionInfraOnDom.find('ul').append(`<li>Transit is open</li>`)
+                }
+                if (thing === "schools") {
+                    regionInfraOnDom.find('ul').append(`<li>Schools are open</li>`)
+                }
+
+                // styles if condition is true/false
+                if (region.infrastucture[thing] === true) {
+                    regionInfraOnDom.find('li').css('color', 'blue')
+                } else {
+                    regionInfraOnDom.find('li').css('color', 'inherit')
+                }
+            }
+        }
+    });
+});
+
+// when a purchaseable item's button is sumbitted
+$('button').on('click', function(e){
+    let purchased = $(this).data("purchased")
+    // console.log(purchased)
+    const buyCost = $(this).data("buy")
+    const sellCost = $(this).data("sell")
+    const allData = $(this).data()
+
+
+    // if item is not purchased, allow user to buy, check to see if they can afford it
+    if (purchased === false && app.disease.info.evoPts >= buyCost) {
+        // purchased = false;
+        const confirmAct = confirm(`Cost to purchase: ${buyCost}`)
+        if (confirmAct) {
+            app.disease.info.evoPts -= buyCost
+            $(this).data("purchased", true)
+            app.updateDiseaseInfo()
+            console.log('BOUGHT', app.disease.info)
+        }
+    // if item is  purchased, allow user to sell, check to see if they can afford it
+    } else if (purchased && app.disease.info.evoPts >= sellCost){
+        const confirmAct = confirm(`Cost to sell: ${sellCost}`)
+        if (confirmAct) {
+            app.disease.info.evoPts -= sellCost
+            $(this).data("purchased", false)
+            app.updateDiseaseInfo()
+            console.log('SOLD', app.disease.info)
+        }
+    } else{
+        alert("You can't afford this.")
+    }
+    
+});
+
+app.updateDiseaseInfo = () => {
+    $(".evolution-points").html(`<h4>${app.disease.info.evoPts}</h4>`)
+}
+
+app.updateOnTick = () => {
+    // to ensure we are using a real number, add a delay w/ an if statement
+    if (app.world.info.infectedPop > 1000){
+        $(".avg-infections").html(`<h4>${Math.floor(app.world.info.infectedPop / app.world.dayCount)}</h4>`)
+        $(".avg-deaths").html(`<h4>${Math.floor(app.world.info.deadPop / app.world.dayCount)}</h4>`)
+        // console.log(Math.floor(app.world.info.infectedPop / app.world.dayCount))
+    }
+}
+
 
 app.init = () => {
-    // app.world.clock()
-    // forcePause()
-    let totalPop = 0;
-    app.regions.forEach((region) => {
-        totalPop += region.population.healthy;
-    })
-    console.log(totalPop);
+    app.forcePause()
+    // app.regionUpdate()
 }
 
 $(function(){
     app.init()
+    app.updateDiseaseInfo()
 });
 
 // Region structure
@@ -972,6 +1176,13 @@ $(function(){
 // 3. call the core props calc function | determines the value change from each modifier
 //      (oh boy...)
 // 4. call the world update function | 
+
+// Building purchasable items
+// 1. hard code each purchasable item in the dom as buttons
+// 1.1 in JS, on button click, get the retrive evoPts data tag value and subtract from current amt
+// 1.2 if evoPts >= currnt pts get item.val() and use it to turn its disease value to true
+// 1.3 call function that contains if statements for each item
+// ** program all "user-selectable" things as items, set the cost to 0 if need be. 
 
 // Every tick
 // 1. scan each region
@@ -997,3 +1208,8 @@ $(function(){
 //         - number of active hospitals, visibility && lethality increases completion rate
 //         - when completion rate reaches 100, start deployment
 //         - when deployment reaches 100 the user gets 10 days to try to win.
+
+
+
+// ** calc chance to spread/infect region based on new chance prop on region
+// **
