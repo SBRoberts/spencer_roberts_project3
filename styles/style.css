@@ -146,6 +146,7 @@ input[type="checkbox"] {
   display: none; }
 
 #game-window {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -205,6 +206,25 @@ input[type="checkbox"] {
 .disease-info div {
   height: 100%; }
 
+.disease-info button {
+  color: silver;
+  background: #333;
+  border: 2px solid transparent;
+  outline: none;
+  margin: .5rem;
+  padding: 1rem .25rem;
+  width: calc(100% / 6);
+  -webkit-transition: color .2s, border .2s, background-color .2s;
+  -o-transition: color .2s, border .2s, background-color .2s;
+  transition: color .2s, border .2s, background-color .2s; }
+  .disease-info button:hover {
+    border: 2px solid crimson;
+    background: silver;
+    color: #333; }
+  .disease-info button[data-purchased="true"] {
+    background-color: crimson;
+    color: silver; }
+
 .symptoms {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -224,8 +244,27 @@ input[type="checkbox"] {
     -ms-flex-pack: justify;
     justify-content: space-between;
     width: 100%; }
-  .symptoms button {
-    padding: .25rem .5rem;
-    width: calc(100% / 6); }
   .symptoms p {
     margin: 0; }
+
+.game-over, .winner {
+  position: absolute;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 5vmax;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  background: -webkit-gradient(linear, left bottom, right top, from(rgba(220, 20, 60, 0.7)), to(rgba(192, 192, 192, 0.7)));
+  background: -webkit-linear-gradient(bottom left, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7));
+  background: -o-linear-gradient(bottom left, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7));
+  background: linear-gradient(to top right, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7)); }

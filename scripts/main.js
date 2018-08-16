@@ -23,17 +23,22 @@ app.disease = {
     coreProps: {
         lethality: 1,
         infectivity: 5,
-        visibility: 10,
+        visibility: 0,
+        // resist attrs are not camel case because html data tag converts camel case to lwr case
+        coldresist: 0,
+        heatresist: 0,
+        moistureresist: 0,
+        drugresist: 0,
     },
     modifiers: {
-        resistance: {
-            cold: 0,
-            heat: 0,
-            moisture: 0,
-            drug: 0,
-        },
+        // resistance: {
+        //     cold: 0,
+        //     heat: 0,
+        //     moisture: 0,
+        //     drug: 0,
+        // },
         transmission: {
-            airborne: true,
+            airborne: false,
             waterborne: false,
             rodent: false,
             insect: false,
@@ -76,18 +81,20 @@ app.world = {
     },
     dayTimer: 0,
     dayCount: 0,
+    vaccine: {
+        cureDevelopment: 0,
+        cureDeployment: 0,
+    },
     clock: setInterval(function () {
         if (app.world.dayTimer === 24) {
             app.world.dayCount++;
             app.world.dayTimer = 0;
         }
         app.world.dayTimer++;
-        app.regionUpdate()
         app.updateOnTick()
         console.log(`Day Timer: ${app.world.dayTimer}, Day Count: ${app.world.dayCount}`)
         // console.log(app.world.info.deadPop);
         
-
     }, 500),
 }
 // A global variable for my world info obj, because I seem to use it a lot
@@ -940,8 +947,14 @@ const chanceRoll = (d) => {
 // MAIN CLOCK FOR GAME
 // THIS FUNCTION DICTATES 
 app.regionUpdate = () => {
+    // reset global stats in order to recalc them
+    worldInfo.alivePop = 0;
+    worldInfo.deadPop = 0;
+    worldInfo.infectedPop = 0;
+    worldInfo.healthyPop = 0;
     // for every region
     app.regions.forEach((region) => {
+        // console.log(worldInfo.alivePop, worldInfo.deadPop, worldInfo.infectedPop, worldInfo.healthyPop  )
         const regionPop = region.population;
 
         // base region infectivity
@@ -949,6 +962,9 @@ app.regionUpdate = () => {
 
         // base region lethality
         region.lethality = app.disease.coreProps.lethality / 100;
+
+        // base region visibility
+        region.visibility = app.disease.coreProps.visibility;
 
         // Expose region if one of the diseases transmission methods are found
         for(activeTransmissionMethod in region.transmission){
@@ -960,13 +976,14 @@ app.regionUpdate = () => {
         // chance to infect region
         if (region.status === "exposed" && chanceRoll(region.infectivity)){
             region.status = "infected"
-            console.log(region.status, region.name)
+            // console.log(region.status, region.name)
         }
         
         if (region.status === "infected" && chanceRoll(region.infectivity)){
             // GLOBAL TRAITS
             // on every update reset to 0, then proceed
             // worldInfo.alivePop, worldInfo.infectedPop, worldInfo.healthyPop, worldInfo.deadPop = 0;
+            const count = 1;
 
             // set alive population
             worldInfo.alivePop += regionPop.alive;
@@ -987,13 +1004,12 @@ app.regionUpdate = () => {
             if (region.population.healthy > 0){
                 regionPop.infected += Math.floor(regionPop.healthy * (region.infectivity / 10000));
                 // region.population.infected += Math.floor(regionPop.healthy * (region.infectivity));
-                console.log(region.name, region.population)
+                // console.log(region.name, region.population)
                 
-            } else {
-                // set healthy population
-                regionPop.healthy = 0;
-                regionPop.healthy = regionPop.alive - regionPop.infected;
             }
+            // set healthy population
+            regionPop.healthy = 0;
+            regionPop.healthy = regionPop.alive - regionPop.infected;
 
 
         }
@@ -1009,170 +1025,202 @@ app.regionUpdate = () => {
     });
 }
 
-$('.region').on('click', function(){
-    let countryId = this.getAttribute("id").split('-').join(" ");
+// returns an object of the region the user clicked on
+app.regionFilter = (key) => {
+    const filter = app.regions.filter((region) => {
+        const regionName = region[key].toLowerCase()
+        if (regionName === app.countryId) {
+            return region
+        };
+    })
+    return filter
+}
+
+// update active region updated on command
+app.refreshActiveRegion = () => {
+    app.activeRegion = app.regionFilter('name')[0];
 
     // empty .region-info on click
     regionInfo.find('ul').empty()
     regionInfo.find('.region-name').empty()
-    
+
     // add region name to region-info div on click
-    regionInfo.find('.region-name').append(countryId)
-
+    regionInfo.find('.region-name').append(app.countryId)
     // for the region I clicked on, iterate through all the regions and find me region whose name matches
-    app.regions.forEach((region) => {
-        if(region.name.toLowerCase() === countryId){
+    if (app.activeRegion && app.activeRegion.name.toLowerCase() === app.countryId) {
 
-            // get region population status on dom
-            for(let populus in region.population){
-                regionPopOnDom.find('ul').append(`
-                    <li>${populus} | ${region.population[populus]}</li>   
+        // get region population status on dom
+        for (let populus in app.activeRegion.population) {
+            regionPopOnDom.find('ul').append(`
+                    <li>${populus} | ${app.activeRegion.population[populus]}</li>   
                 `)
-            }
+        }
 
-            // get region affliction status on dom - style for true or false
-            for (let afflictions in region.afflictions) {
-                regionAfflicOnDom.find('ul').append(`
+        // get region affliction status on dom - style for true or false
+        for (let afflictions in app.activeRegion.afflictions) {
+            regionAfflicOnDom.find('ul').append(`
                     <li>${afflictions} are in effect</li>
                 `)
 
-                if (region.afflictions[afflictions] === true){
-                    regionAfflicOnDom.find('li').css('color', 'blue')
-                } else {
-                    regionAfflicOnDom.find('li').css('color', 'inherit')
-                }
-            }
-
-            // get region government-affairs status on dom - style for true or false
-            for (let item in region.government) {
-
-                // format text for each option (ugh)
-                if(item === "noWater"){
-                    regionGovOnDom.find('ul').append(`<li>Not handing out water</li>`)
-                } 
-                if (item === "noMasks") {
-                    regionGovOnDom.find('ul').append(`<li>Not handing out masks</li>`)
-                }
-                if (item === "rodentsExterm") {
-                    regionGovOnDom.find('ul').append(`<li>Not exerminating rodents</li>`)
-                }
-                if (item === "curfew") {
-                    regionGovOnDom.find('ul').append(`<li>Curfews are not enforced</li>`)
-                }
-                if (item === "martialLaw") {
-                    regionGovOnDom.find('ul').append(`<li>Martial law not in effect</li>`)
-                }
-                if (item === "cremation") {
-                    regionGovOnDom.find('ul').append(`<li>Dead bodies not being burned</li>`)
-                }
-
-                // styles if condition is true/false
-                if (region.government[item] === true) {
-                    regionAfflicOnDom.find('li').css('color', 'blue')
-                } else {
-                    regionAfflicOnDom.find('li').css('color', 'inherit')
-                }
-            }
-
-            // get region infrastructure status on dom - style for true or false
-            for (let thing in region.infrastucture) {
-
-                // format text for each option (ugh)
-                if (thing === "airports") {
-                    regionInfraOnDom.find('ul').append(`<li>Airports are open</li>`)
-                }
-                if (thing === "shipyards") {
-                    regionInfraOnDom.find('ul').append(`<li>Shipyards are open</li>`)
-                }
-                if (thing === "hospitals") {
-                    regionInfraOnDom.find('ul').append(`<li>Hospitals are open</li>`)
-                }
-                if (thing === "transit") {
-                    regionInfraOnDom.find('ul').append(`<li>Transit is open</li>`)
-                }
-                if (thing === "schools") {
-                    regionInfraOnDom.find('ul').append(`<li>Schools are open</li>`)
-                }
-
-                // styles if condition is true/false
-                if (region.infrastucture[thing] === true) {
-                    regionInfraOnDom.find('li').css('color', 'blue')
-                } else {
-                    regionInfraOnDom.find('li').css('color', 'inherit')
-                }
+            if (app.activeRegion.afflictions[afflictions] === true) {
+                regionAfflicOnDom.find('li').css('color', 'blue')
+            } else {
+                regionAfflicOnDom.find('li').css('color', 'inherit')
             }
         }
-    });
+
+        // get region government-affairs status on dom - style for true or false
+        for (let item in app.activeRegion.government) {
+
+            // format text for each option (ugh)
+            if (item === "noWater") {
+                regionGovOnDom.find('ul').append(`<li>Not handing out water</li>`)
+            }
+            if (item === "noMasks") {
+                regionGovOnDom.find('ul').append(`<li>Not handing out masks</li>`)
+            }
+            if (item === "rodentsExterm") {
+                regionGovOnDom.find('ul').append(`<li>Not exerminating rodents</li>`)
+            }
+            if (item === "curfew") {
+                regionGovOnDom.find('ul').append(`<li>Curfews are not enforced</li>`)
+            }
+            if (item === "martialLaw") {
+                regionGovOnDom.find('ul').append(`<li>Martial law not in effect</li>`)
+            }
+            if (item === "cremation") {
+                regionGovOnDom.find('ul').append(`<li>Dead bodies not being burned</li>`)
+            }
+
+            // styles if condition is true/false
+            if (app.activeRegion.government[item] === true) {
+                regionAfflicOnDom.find('li').css('color', 'blue')
+            } else {
+                regionAfflicOnDom.find('li').css('color', 'inherit')
+            }
+        }
+
+        // get region infrastructure status on dom - style for true or false
+        for (let thing in app.activeRegion.infrastucture) {
+
+            // format text for each option (ugh)
+            if (thing === "airports") {
+                regionInfraOnDom.find('ul').append(`<li>Airports are open</li>`)
+            }
+            if (thing === "shipyards") {
+                regionInfraOnDom.find('ul').append(`<li>Shipyards are open</li>`)
+            }
+            if (thing === "hospitals") {
+                regionInfraOnDom.find('ul').append(`<li>Hospitals are open</li>`)
+            }
+            if (thing === "transit") {
+                regionInfraOnDom.find('ul').append(`<li>Transit is open</li>`)
+            }
+            if (thing === "schools") {
+                regionInfraOnDom.find('ul').append(`<li>Schools are open</li>`)
+            }
+
+            // styles if condition is true/false
+            if (app.activeRegion.infrastucture[thing] === true) {
+                regionInfraOnDom.find('li').css('color', 'blue')
+            } else {
+                regionInfraOnDom.find('li').css('color', 'inherit')
+            }
+        }
+    }
+}
+
+$('.region').on('click', function(){
+    app.countryId = this.getAttribute("id").split('-').join(" ");
+    
+    app.refreshActiveRegion()
+    
 });
 
 // get all properties from an input object, find matching values in an target object & do math
 app.applyPurchase = (inputObj, targetObj, posNeg) => {
     for (let prop in inputObj) {
         if (targetObj[prop] !== undefined) {
-            targetObj[prop] += inputObj[prop] * posNeg
-            // console.log(targetObj)
+            if (typeof targetObj[prop] === 'number'){
+                targetObj[prop] += inputObj[prop] * posNeg
+                console.log(targetObj)
+            } else{
+                targetObj[prop] = posNeg;
+                console.log(targetObj)
+            }
         }
     }
 }
 
-// when a purchaseable item's button is sumbitted
-$('button').on('click', function(){
-    let purchased = $(this).data("purchased")
-    const buyCost = $(this).data("buy")
-    const sellCost = $(this).data("sell")
-    const allData = $(this).data()
+// when a purchaseable item's button is sumbitted - initiates event listener
+app.buyFunctionality = () => {
+    $('button').on('click', function(){
+        let purchased = $(this).data("purchased")
+        const buyCost = $(this).data("buy")
+        const sellCost = $(this).data("sell")
+        const allData = $(this).data()
+        const updateEvoPts = () => $(".evolution-points").html(`<h4>Evolution Points: ${app.disease.info.evoPts}</h4>`)
+        // console.log(allData)
+        
+        // if item is not purchased, allow user to buy, check to see if they can afford it
+        if (!purchased && app.disease.info.evoPts >= buyCost) {
+            // get confirmation of action
+            const confirmAct = confirm(`Cost to purchase: ${buyCost}`)
     
-    // if item is not purchased, allow user to buy, check to see if they can afford it
-    if (!purchased && app.disease.info.evoPts >= buyCost) {
-        // get confirmation of action
-        const confirmAct = confirm(`Cost to purchase: ${buyCost}`)
-
-        // if confirmAct true
-        if (confirmAct) {
-
-            // update evolution pts
-            app.disease.info.evoPts -= buyCost
-
-            // chnaged purchased attr to true
-            $(this).data("purchased", true)
-
-            // update disease info
-            app.updateDiseaseInfo()
-
-            // applied purchased item's stats
-            app.applyPurchase(allData, app.disease.coreProps, 1)
-            console.log('BOUGHT')
-
-        }
-    // if item is  purchased, allow user to sell, check to see if they can afford it
-    } else if (purchased && app.disease.info.evoPts >= sellCost){
-        // get confirmation of action
-        const confirmAct = confirm(`Cost to sell: ${sellCost}`)
-
-        // if confirmAct true
-        if (confirmAct) {
-            // update evolution pts
-            app.disease.info.evoPts -= sellCost
-
-            // change purchased attr to true
-            $(this).data("purchased", false)
-
-            // update disease info
-            app.updateDiseaseInfo()
-
-            // applied purchased item's stats ** subtract since we're selling
-            app.applyPurchase(allData, app.disease.coreProps, -1)
-
-            console.log('SOLD')
-        }
-    } else{
-        alert("You can't afford this.")
-    }
+            // if confirmAct true
+            if (confirmAct) {
     
-});
+                // update evolution pts
+                app.disease.info.evoPts -= buyCost
+    
+                // chnaged purchased attr to true
+                $(this).data("purchased", true)
+    
+                // update disease info
+                updateEvoPts();
+    
+                // applied purchased item's stats
+                app.applyPurchase(allData, app.disease.coreProps, 1)
+                app.applyPurchase(allData, app.disease.modifiers.transmission, true)
+                // console.log($(this).parent().parent());
+                
+                console.log('BOUGHT')
+    
+            }
+        // if item is  purchased, allow user to sell, check to see if they can afford it
+        } else if (purchased && app.disease.info.evoPts >= sellCost){
+            // get confirmation of action
+            const confirmAct = confirm(`Cost to sell: ${sellCost}`)
+    
+            // if confirmAct true
+            if (confirmAct) {
+                // update evolution pts
+                app.disease.info.evoPts -= sellCost
+    
+                // change purchased attr to true
+                $(this).data("purchased", false)
+    
+                // update disease info
+                updateEvoPts()
+    
+                // applied purchased item's stats ** subtract since we're selling
+                app.applyPurchase(allData, app.disease.coreProps, -1)
+                app.applyPurchase(allData, app.disease.modifiers.transmission, false)
+    
+                console.log('SOLD')
+            }
+        } else{
+            alert("You can't afford this.")
+        }
+        
+    });
+}
+
+app.gameSetup = () => {
+    
+};
 
 app.updateDiseaseInfo = () => {
-    $(".evolution-points").html(`<h4>Evolution Points: ${app.disease.info.evoPts}</h4>`)
 }
 
 app.updateOnTick = () => {
@@ -1182,6 +1230,48 @@ app.updateOnTick = () => {
         $(".avg-deaths").html(`<h4>Avg Deaths/day: ${Math.floor(app.world.info.deadPop / app.world.dayCount)}</h4>`)
         // console.log(Math.floor(app.world.info.infectedPop / app.world.dayCount))
     }
+    app.regionUpdate()
+    app.vaccineStatus()
+    app.refreshActiveRegion()
+}
+
+// Developing a lose condition
+// let vaccineDayCount = 0
+app.vaccineStatus = () => {
+    // when visibility reaches a certain level, give
+    if(app.disease.coreProps.visibility >= 10){
+        // count 10 days, adding 1 to the deployment status every time
+        if (app.world.dayTimer === 1) {
+            app.world.vaccine.cureDevelopment ++
+            console.log(app.world.vaccine)
+        }
+        
+        // if cure is developed, begin to deploy it
+        if (app.world.vaccine.cureDevelopment > 1){
+            
+            // setting the number of days until user loses
+            if (app.world.vaccine.cureDeployment >= 1){
+                $('.game-over').remove()
+                $('.game-window').append(`
+                <div class="game-over">Game Over</div>
+                `)
+            }
+            // count 20 days, adding 1 to the deployment status every time
+            if(app.world.dayTimer === 1){
+                app.world.vaccine.cureDeployment ++
+            }
+        }
+    }
+}
+
+// check every tick to see if user wins!
+app.winCondition = () => {
+    if(!app.world.info.alivePop){
+        $('.winner').remove()
+        $('.game-window').append(`
+                <div class="winner">You Win</div>
+                `)
+    }
 }
 
 
@@ -1189,6 +1279,7 @@ app.init = () => {
     // app.forcePause()
     app.regionUpdate()
     app.updateDiseaseInfo()
+    app.buyFunctionality()
 }
 
 $(function(){
