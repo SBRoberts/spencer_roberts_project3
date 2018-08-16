@@ -19,6 +19,16 @@ input[type="checkbox"]{
     display: none;
 }
 
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    .half{
+        width: 48%;
+    }
+}
+
 #game-window{
     position: relative;
     display: flex;
@@ -39,10 +49,11 @@ input[type="checkbox"]{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    top: 0;
+    // top: 0;
     background-color: $lightShade;
     color: $darkShade;
     padding: 2rem;
+    border: 4px solid $darkShade;
     .region-name{
         width: 100%;
     }
@@ -61,17 +72,44 @@ input[type="checkbox"]{
 }
 
 .disease-info{
+    position: absolute;
+    bottom: 0;
     label{
-        font-size: 40px;
+        padding: .5rem 1rem;
+        font-size: 30px;
+        width: 100%;
+        height: 100%;
+        background: rgba($color: $lightShade, $alpha: 1);
+        transition: height .3s;
     }
     .disease-container{
             height: 0;
+            max-height: 0;
             overflow: hidden;
-            transition: height .3s;
+            transition: max-height .3s, height .3s;
         }
+    .fa-chevron-up{
+        position: absolute;
+        right: 1rem;
+        top: 1.4rem;
+        transform-origin: center;
+        transform: rotate(0deg) translateY(-50%);
+        transition: transform .3s;
+        font-size: 1.5rem;
+        path{
+            fill: $darkShade    ;
+        }
+    }
     input:checked{
-        + .disease-container{
-            height: 100%;
+        + .fa-chevron-up {
+            transform: rotate(180deg);
+            top: .8rem;
+            + .disease-container{
+                height: 100%;
+                max-height: 1000px;
+            }
+        }
+        .fa-chevron-up{
         }
     }
     div{
@@ -87,12 +125,17 @@ input[type="checkbox"]{
         padding: 1rem .25rem;
         width: calc(100% / 6);
         transition: color .2s, border .2s, background-color .2s;
+        font-size: 1rem;
         &:hover{
             border: 2px solid $highlight;
             background: $lightShade;
             color: $darkShade;
         }
-        &[data-purchased="true"]{
+        p{
+            margin: 0;
+        }
+        &.purchased{
+            position: relative;
             background-color: $highlight;
             color: $lightShade;
         }
@@ -113,9 +156,22 @@ input[type="checkbox"]{
     }
     button{
     }
-    p{
-        margin: 0;
+}
+
+.resistances, .transmission {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid $darkShade;
+    margin: .5rem;
+    width: 40%;
+    button{
+        // flex: 1 0 50%;
+        min-width: 45%;
     }
+}
+
+.container{
+    width: 100%;
 }
 
 .game-over, .winner{
@@ -132,4 +188,24 @@ input[type="checkbox"]{
     text-transform: uppercase;
     letter-spacing: .2rem;
     background: linear-gradient(to top right, rgba($color: $highlight, $alpha: .7) , rgba($color: $lightShade, $alpha: .7));
+}
+
+.region-info, .disease-info{
+    background: rgba($color: $lightShade, $alpha: .7);
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    max-height: 100vh;
+    // align-items: flex-start;
+    // justify-content: space-between;
+    .fa-window-close, .fa-chevron-down{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
+    }
+}
+
+.region-info{
+    position: absolute;
 }

@@ -145,6 +145,19 @@ ul {
 input[type="checkbox"] {
   display: none; }
 
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%; }
+  .row .half {
+    width: 48%; }
+
 #game-window {
   position: relative;
   display: -webkit-box;
@@ -172,10 +185,10 @@ input[type="checkbox"] {
   flex-wrap: wrap;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  top: 0;
   background-color: silver;
   color: #333;
-  padding: 2rem; }
+  padding: 2rem;
+  border: 4px solid #333; }
   .region-info .region-name {
     width: 100%; }
   .region-info div {
@@ -190,40 +203,75 @@ input[type="checkbox"] {
   .region:hover {
     fill: crimson; }
 
-.disease-info label {
-  font-size: 40px; }
-
-.disease-info .disease-container {
-  height: 0;
-  overflow: hidden;
-  -webkit-transition: height .3s;
-  -o-transition: height .3s;
-  transition: height .3s; }
-
-.disease-info input:checked + .disease-container {
-  height: 100%; }
-
-.disease-info div {
-  height: 100%; }
-
-.disease-info button {
-  color: silver;
-  background: #333;
-  border: 2px solid transparent;
-  outline: none;
-  margin: .5rem;
-  padding: 1rem .25rem;
-  width: calc(100% / 6);
-  -webkit-transition: color .2s, border .2s, background-color .2s;
-  -o-transition: color .2s, border .2s, background-color .2s;
-  transition: color .2s, border .2s, background-color .2s; }
-  .disease-info button:hover {
-    border: 2px solid crimson;
+.disease-info {
+  position: absolute;
+  bottom: 0; }
+  .disease-info label {
+    padding: .5rem 1rem;
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
     background: silver;
-    color: #333; }
-  .disease-info button[data-purchased="true"] {
-    background-color: crimson;
-    color: silver; }
+    -webkit-transition: height .3s;
+    -o-transition: height .3s;
+    transition: height .3s; }
+  .disease-info .disease-container {
+    height: 0;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height .3s, height .3s;
+    -o-transition: max-height .3s, height .3s;
+    transition: max-height .3s, height .3s; }
+  .disease-info .fa-chevron-up {
+    position: absolute;
+    right: 1rem;
+    top: 1.4rem;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate(0deg) translateY(-50%);
+    -ms-transform: rotate(0deg) translateY(-50%);
+    transform: rotate(0deg) translateY(-50%);
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    -o-transition: transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+    font-size: 1.5rem; }
+    .disease-info .fa-chevron-up path {
+      fill: #333; }
+  .disease-info input:checked + .fa-chevron-up {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    top: .8rem; }
+    .disease-info input:checked + .fa-chevron-up + .disease-container {
+      height: 100%;
+      max-height: 1000px; }
+  .disease-info div {
+    height: 100%; }
+  .disease-info button {
+    color: silver;
+    background: #333;
+    border: 2px solid transparent;
+    outline: none;
+    margin: .5rem;
+    padding: 1rem .25rem;
+    width: calc(100% / 6);
+    -webkit-transition: color .2s, border .2s, background-color .2s;
+    -o-transition: color .2s, border .2s, background-color .2s;
+    transition: color .2s, border .2s, background-color .2s;
+    font-size: 1rem; }
+    .disease-info button:hover {
+      border: 2px solid crimson;
+      background: silver;
+      color: #333; }
+    .disease-info button p {
+      margin: 0; }
+    .disease-info button.purchased {
+      position: relative;
+      background-color: crimson;
+      color: silver; }
 
 .symptoms {
   display: -webkit-box;
@@ -244,8 +292,21 @@ input[type="checkbox"] {
     -ms-flex-pack: justify;
     justify-content: space-between;
     width: 100%; }
-  .symptoms p {
-    margin: 0; }
+
+.resistances, .transmission {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  border: 2px solid #333;
+  margin: .5rem;
+  width: 40%; }
+  .resistances button, .transmission button {
+    min-width: 45%; }
+
+.container {
+  width: 100%; }
 
 .game-over, .winner {
   position: absolute;
@@ -268,3 +329,21 @@ input[type="checkbox"] {
   background: -webkit-linear-gradient(bottom left, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7));
   background: -o-linear-gradient(bottom left, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7));
   background: linear-gradient(to top right, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7)); }
+
+.region-info, .disease-info {
+  background: rgba(192, 192, 192, 0.7);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 90%;
+  max-height: 100vh; }
+  .region-info .fa-window-close, .region-info .fa-chevron-down, .disease-info .fa-window-close, .disease-info .fa-chevron-down {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer; }
+
+.region-info {
+  position: absolute; }

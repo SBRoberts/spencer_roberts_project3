@@ -944,8 +944,7 @@ const chanceRoll = (d) => {
     return success;
 }
 
-// MAIN CLOCK FOR GAME
-// THIS FUNCTION DICTATES 
+// UPDATES ALMOST EVERY ASPECT OF EACH REGION
 app.regionUpdate = () => {
     // reset global stats in order to recalc them
     worldInfo.alivePop = 0;
@@ -998,19 +997,15 @@ app.regionUpdate = () => {
             worldInfo.deadPop += regionPop.dead;
 
             // REGION TRAITS
-            // set alive population
+            // alive population is hard coded
 
             // set infected population
             if (region.population.healthy > 0){
                 regionPop.infected += Math.floor(regionPop.healthy * (region.infectivity / 10000));
-                // region.population.infected += Math.floor(regionPop.healthy * (region.infectivity));
-                // console.log(region.name, region.population)
-                
             }
             // set healthy population
             regionPop.healthy = 0;
             regionPop.healthy = regionPop.alive - regionPop.infected;
-
 
         }
         // set dead population
@@ -1132,6 +1127,7 @@ app.refreshActiveRegion = () => {
 
 $('.region').on('click', function(){
     app.countryId = this.getAttribute("id").split('-').join(" ");
+    $('.region-info').show(300)
     
     app.refreshActiveRegion()
     
@@ -1175,6 +1171,11 @@ app.buyFunctionality = () => {
     
                 // chnaged purchased attr to true
                 $(this).data("purchased", true)
+
+                // validate that pruchased === true, add class to button
+                if ($(this).data("purchased") === true){
+                    $(this).addClass('purchased')
+                }
     
                 // update disease info
                 updateEvoPts();
@@ -1199,6 +1200,11 @@ app.buyFunctionality = () => {
     
                 // change purchased attr to true
                 $(this).data("purchased", false)
+
+                // validate that pruchased === false, remove class from button
+                if ($(this).data("purchased") === false) {
+                    $(this).removeClass('purchased')
+                }
     
                 // update disease info
                 updateEvoPts()
@@ -1217,7 +1223,20 @@ app.buyFunctionality = () => {
 }
 
 app.gameSetup = () => {
-    
+    // hide region info on init
+    $('.region-info').hide()
+
+    // hide window on click
+    $('.fa-window-close').on('click', function(e){
+        console.log(e)
+        $(this).parent().hide(300)
+        // if ($(this).parent()[0].className === 'disease-info'){
+        //     // we programmed our close icon to remove the icon. this is a hack
+        //     $(this).parent().prepend(`<i class="far fa-window-close"></i>`)
+        //     $(this).parent().show(300)
+        // }
+        
+    });
 };
 
 app.updateDiseaseInfo = () => {
@@ -1276,7 +1295,8 @@ app.winCondition = () => {
 
 
 app.init = () => {
-    // app.forcePause()
+    app.forcePause()
+    app.gameSetup()
     app.regionUpdate()
     app.updateDiseaseInfo()
     app.buyFunctionality()
