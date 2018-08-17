@@ -21,8 +21,8 @@ app.disease = {
         avgDeaths: 0,
     },
     coreProps: {
-        lethality: 1,
-        infectivity: 5,
+        lethality: 0,
+        infectivity: 0,
         visibility: 0,
         // resist attrs are not camel case because html data tag converts camel case to lwr case
         coldresist: 0,
@@ -31,12 +31,6 @@ app.disease = {
         drugresist: 0,
     },
     modifiers: {
-        // resistance: {
-        //     cold: 0,
-        //     heat: 0,
-        //     moisture: 0,
-        //     drug: 0,
-        // },
         transmission: {
             airborne: false,
             waterborne: false,
@@ -47,25 +41,25 @@ app.disease = {
             virus: false,
             bacteria: false,
             parasite: false,
-            bonus:[
-                {catching: false},
-                {durable: false},
-                {bloodyVomit: false},
-                {bloodLetter: false},
-                {decomposer: false},
-                {ablaze: false},
-                {biohazard: false},
-                {famous: false},
-                {cured: false},
-                {isolated: false},
-                {expected: false},
-                {apocalyptic: false},
-                {mutator: false},
-                {stealthy: false},
-                {harmless: false},
-                {immune: false},
-                {headPopper: false},
-            ],
+            bonus:{
+                catching: false,
+                durable: false,
+                bloodyVomit: false,
+                bloodLetter: false,
+                decomposer: false,
+                ablaze: false,
+                biohazard: false,
+                famous: false,
+                cured: false,
+                isolated: false,
+                expected: false,
+                apocalyptic: false,
+                mutator: false,
+                stealthy: false,
+                harmless: false,
+                immune: false,
+                headPopper: false,
+            },
         }
     }
 }
@@ -1150,7 +1144,7 @@ app.applyPurchase = (inputObj, targetObj, posNeg) => {
 
 // when a purchaseable item's button is sumbitted - initiates event listener
 app.buyFunctionality = () => {
-    $('button').on('click', function(){
+    $('.purchase').on('click', function(){
         let purchased = $(this).data("purchased")
         const buyCost = $(this).data("buy")
         const sellCost = $(this).data("sell")
@@ -1230,17 +1224,11 @@ app.gameSetup = () => {
     $('.fa-window-close').on('click', function(e){
         console.log(e)
         $(this).parent().hide(300)
-        // if ($(this).parent()[0].className === 'disease-info'){
-        //     // we programmed our close icon to remove the icon. this is a hack
-        //     $(this).parent().prepend(`<i class="far fa-window-close"></i>`)
-        //     $(this).parent().show(300)
-        // }
-        
     });
 };
 
-app.updateDiseaseInfo = () => {
-}
+// app.updateDiseaseInfo = () => {
+// }
 
 app.updateOnTick = () => {
     // to ensure we are using a real number, add a delay w/ an if statement
@@ -1283,6 +1271,39 @@ app.vaccineStatus = () => {
     }
 }
 
+// A function that contains a bunch of conditionals that activate certain traits
+// includes primary disease classes
+app.applyTraits = () => {
+    const modifiers = app.disease.modifiers.traits
+    const bonus = app.disease.modifiers.traits.bonus
+    const coreProps = app.disease.coreProps
+
+    const propChange = (eval, infect, lethal, visible, bonus = coreProps.coldresist, bonusVal = 0) => {
+        if(eval){
+            coreProps.infectivity += infect;
+            coreProps.lethality += lethal;
+            coreProps.visibility += visible;
+            bonus += bonusVal;
+        }
+        console.log(coreProps)
+    }
+
+    // Disease Classes
+    propChange(modifiers.bacteria, 5, 2, 2)
+    propChange(modifiers.parasite, 3, 2, 0)
+    propChange(modifiers.virus, 6, 2, 3)
+}
+
+app.startGame = () => {
+    $(".start-game").on('submit', function(e){
+        e.preventDefault()
+        $(this).parent().parent().hide(700)
+        const selectedClass = $('.class-type:checked').attr("id")
+        app.disease.modifiers.traits[selectedClass] = true;
+        app.applyTraits()
+    });
+}
+
 // check every tick to see if user wins!
 app.winCondition = () => {
     if(!app.world.info.alivePop){
@@ -1295,15 +1316,16 @@ app.winCondition = () => {
 
 
 app.init = () => {
-    app.forcePause()
+    // app.forcePause()
     app.gameSetup()
     app.regionUpdate()
-    app.updateDiseaseInfo()
+    // app.updateDiseaseInfo()
     app.buyFunctionality()
 }
 
 $(function(){
     app.init()
+    app.startGame()
 });
 
 // Region structure
@@ -1360,3 +1382,31 @@ $(function(){
 
 // ** calc chance to spread/infect region based on new chance prop on region
 // **
+
+
+// INTRO SCREEN
+// 1. create form
+// 2. make 3 radio buttons that change corresponding trait in disease obj to true
+// 3. make a text input for user's disese name
+// 4 on form submit, apply class traits, set disease name to input.val() and form.hide()
+
+// let string = "fun-thing"
+// console.log(string);
+
+// string = string.split('-').join(' ')
+// console.log(string);
+
+const randomIndex = (array) => {
+    return array[Math.floor(Math.random() * array.length)] 
+}
+
+const multipleResults = [
+    "style cool",
+    "style dumb",
+    "style idiot",
+    "style fun",
+]
+
+// randomIndex(multipleResults)
+
+

@@ -9,6 +9,57 @@
 </head>
 <body>
     <section id="game-window" class="game-window">
+        <div class="home-screen">
+            <div class="container">
+                <div class="row">
+                    <h2>Choose a Class</h2>
+                </div>
+                <form class="start-game" action="">
+                    <div class="row">
+                        <input class="class-type" type="radio" name="disease" id="virus" data-virus="true">
+                        <label for="virus">
+                            <h3>Virus</h3>
+                            <svg viewBox="0 0 83 92" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round"
+                                stroke-miterlimit="1.41">
+                                <g fill-rule="nonzero">
+                                    <path d="M81.98 80.13l-10.5-19.3c-.2-.4-.6-.7-1.1-.8-.5-.1-1 0-1.3.3l-4.5 3.4-4.6-9c-.3-.5-.7-.8-1.3-.9-.6-.1-1.1.2-1.4.6l-5.6 7.2v-3.7-6.7l13.6-7.9c.5-.3.8-.8.8-1.4v-26.8c0-.6-.3-1.1-.8-1.4L41.88.23c-.5-.3-1.1-.3-1.6 0l-23.3 13.4c-.5.3-.8.8-.8 1.4v26.9c0 .6.3 1.1.8 1.4l13.6 7.9v10.2l-5.5-7c-.3-.4-.9-.7-1.4-.6-.6.1-1 .4-1.3.9l-4.6 9-4.5-3.4c-.4-.3-.9-.4-1.3-.3-.5.1-.9.4-1.1.8L.18 80.13c-.4.8-.1 1.8.7 2.2.2.1.5.2.8.2.6 0 1.1-.3 1.4-.9l9.7-17.7 3.5 2.6-2.2 4.4c-.4.8-.1 1.8.7 2.2.2.1.5.2.7.2.6 0 1.2-.3 1.5-.9l2-3.9 11.6 8.8-11.3-3.6c-.8-.2-1.6.1-2 .8l-7.3 14.2c-.4.8-.1 1.8.7 2.2.2.1.5.2.7.2.6 0 1.2-.3 1.5-.9l6.7-13 15 4.9 5.7 3.1c.2.1.5.2.8.2.3 0 .5-.1.8-.2l5.9-3.2 15-4.7 6.6 13c.3.6.9.9 1.5.9.3 0 .5-.1.7-.2.8-.4 1.1-1.4.7-2.2l-7.3-14.2c-.4-.7-1.2-1.1-2-.8l-11.1 3.5 11.4-8.6 2 3.9c.3.6.9.9 1.5.9.3 0 .5-.1.7-.2.8-.4 1.1-1.4.7-2.2l-2.1-4.5 3.4-2.6 9.6 17.7c.3.5.9.9 1.4.9.3 0 .5-.1.8-.2.8-.5 1.1-1.5.7-2.3zm-51.4-6.7l-10.3-7.7 3.7-7.3 6.5 8.3v6.7h.1zm-11.1-32.4v-25l21.6-12.5 21.6 12.5v25l-21.6 12.5-21.6-12.5zm28.8 37l-2 1.1-5.2 2.9-5-2.8-2.2-1.2v-3.3l6.4 3.5c.2.1.5.2.8.2.3 0 .5-.1.8-.2l6.4-3.5v3.3zm0-7.1l-7.2 4-7.2-4v-3.3l6.4 3.5c.2.1.5.2.8.2.3 0 .5-.1.8-.2l6.4-3.5v3.3zm0-7.1l-7.2 4-7.2-4v-3.3l6.4 3.5c.2.1.5.2.8.2.3 0 .5-.1.8-.2l6.4-3.5v3.3zm0-7l-7.2 4-7.2-4v-3.3l6.4 3.5c.3.1.5.1.8.1.3 0 .5-.1.8-.2l6.4-3.5v3.4zm3.3 16.7v-6.6l6.6-8.5 3.7 7.3-10.3 7.8z"
+                                    />
+                                    <path d="M42.28 47.83c-.9-5 3.1-6.5 9.2-8.1 3.6-1 6.7-1.8 7.8-4.1.6-1.1.6-2.4.1-3.9-.6-1.6-1.6-2.7-3-3.3-3.1-1.3-7.2.6-11.9 2.8-4.7 2.2-9.9 4.6-14 3.7-2.6-.6-4.2-1.8-4.6-3.4-.4-1.3.2-2.9 1.3-4 .6-.6 2.2-1.8 4.5-1.1 8.6 2.8 16.7.8 19.9-2.6 1.5-1.5 1.9-3.2 1.4-4.9-.5-1.3-1.4-2.3-2.7-2.9-2.3-1-5.7-.6-9.5 1.1-2 .9-3.7 1.1-4.6.4-.6-.4-.7-.9-.7-1.2 0-.7.6-1.1 2.3-2.1 2.1-1.1 5-2.6 5-6.5 0-.9-.7-1.6-1.6-1.6-.9 0-1.6.7-1.6 1.6 0 1.9-1.2 2.6-3.2 3.6-1.8.9-4.1 2.1-4.1 5 0 1.6.8 3 2.2 3.9 1.1.7 3.6 1.7 7.8-.2 2.9-1.3 5.5-1.7 6.9-1.1.5.2.8.5.9.9.2.5 0 1-.6 1.6-2.1 2.2-8.9 4.2-16.6 1.7a7.6 7.6 0 0 0-7.7 1.8c-2 2-2.9 4.7-2.2 7.2.4 1.6 1.9 4.5 7 5.7 5.2 1.2 11-1.5 16.2-3.9 3.7-1.7 7.5-3.5 9.3-2.8.3.1.8.4 1.2 1.4.3.8.1 1.1.1 1.2-.5 1-3.3 1.8-5.8 2.5-2.7.7-5.8 1.6-8.1 3.2-2.9 2-4 5-3.4 8.7.1.8.8 1.4 1.6 1.4h.3c.5.1 1.1-.8.9-1.7z"
+                                    />
+                                </g>
+                            </svg>
+                        </label>
+                        <input class="class-type" type="radio" name="disease" id="bacteria" data-bacteria="true">
+                        <label for="bacteria">
+                            <h3>Bacteria</h3>
+                            <svg viewBox="0 0 75 89" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round"
+                                stroke-miterlimit="1.41">
+                                <g fill-rule="nonzero">
+                                    <path d="M71.6 59.12c.1-1.47.5-2.11 1.02-2.93.6-.95 1.35-2.13 1.48-4.47 0-1.21-.65-2.27-1.28-3.3a6.02 6.02 0 0 1-.98-2.08c-.05-.48.22-1.24.48-1.98.4-1.16.87-2.48.52-3.82-.45-1.65-1.81-2.62-2.9-3.4a6.53 6.53 0 0 1-1.26-1.04c-.25-.33-.49-.77-.75-1.23-.53-.96-1.2-2.14-2.26-2.82a13.15 13.15 0 0 0-1.2-4.05c.9-1.86 1.34-3.83 1.34-6 0-6.65-4.54-10.96-6.97-13.27l-.1-.08-.8-.78a43.7 43.7 0 0 1-.78-.8l-.08-.1C54.76 4.54 50.46 0 43.8 0c-2.17 0-4.14.44-6 1.35a13.45 13.45 0 0 0-6-1.35c-6.66 0-10.96 4.54-13.27 6.97l-.09.1-.78.8c-.25.26-.52.51-.8.78l-.09.08C14.34 11.04 9.81 15.35 9.81 22c0 2.17.44 4.14 1.34 6a13.15 13.15 0 0 0-1.2 4.04c-1 .63-1.7 1.7-2.3 2.63-.32.5-.63.98-.93 1.33a6.8 6.8 0 0 1-1.42.99c-1.17.7-2.62 1.56-3.23 3.15-.5 1.33-.16 2.74.14 3.98.19.77.38 1.56.3 2.06-.12.62-.61 1.38-1.1 2.12C.73 49.37 0 50.48 0 51.76v.13c.18 2.03 1 3.05 1.66 3.86.55.67.9 1.11 1.03 2.23a3.66 3.66 0 0 1-.5 2.4 6.57 6.57 0 0 0-.8 4.07c.22 2 1.02 2.99 1.67 3.79.53.67.89 1.11 1.01 2.24.13 1.17-.1 1.68-.47 2.45a7.15 7.15 0 0 0-.84 3.87c.05.8.7 1.42 1.5 1.42h.08a1.5 1.5 0 0 0 1.42-1.58c-.06-1.15.2-1.68.54-2.42.44-.91.98-2.05.75-4.07-.22-2-1.01-3-1.66-3.8a3.65 3.65 0 0 1-1.01-2.23 3.66 3.66 0 0 1 .5-2.41 6.57 6.57 0 0 0 .8-4.07c-.23-1.98-1.04-2.98-1.69-3.78-.52-.65-.88-1.1-.99-2.15.04-.4.53-1.16.93-1.78.62-.94 1.31-2 1.53-3.23a8.08 8.08 0 0 0-.33-3.3c-.2-.8-.43-1.73-.25-2.2.23-.61 1.1-1.13 1.95-1.63a8.7 8.7 0 0 0 2.13-1.58c.4-.46.74-.97 1.07-1.48.94 5.24 4.63 8.75 6.75 10.76l.09.08c.27.27.55.52.8.78l.78.8.08.1c2.22 2.33 6.28 6.59 12.47 6.93-.16.52-.39.95-.63 1.43-.57 1.08-1.22 2.32-1.29 4.7a9.47 9.47 0 0 0 1.03 4.78c.45.98.8 1.75.75 3.44-.04 1.7-.44 2.45-.94 3.4-.57 1.1-1.21 2.33-1.28 4.72-.06 2.39.52 3.65 1.03 4.77.44.98.8 1.76.75 3.45a1.5 1.5 0 0 0 1.46 1.54h.04c.81 0 1.48-.64 1.5-1.46.07-2.39-.51-3.66-1.02-4.77a6.56 6.56 0 0 1-.76-3.45c.05-1.7.44-2.45.94-3.4.57-1.1 1.22-2.33 1.28-4.72.07-2.38-.51-3.65-1.02-4.77-.45-.98-.8-1.75-.75-3.44.04-1.7.44-2.45.94-3.4.4-.8.86-1.66 1.1-2.99 1.28-.2 2.5-.57 3.68-1.14 1.6.78 3.3 1.2 5.13 1.3l-.1.18a5.87 5.87 0 0 0-.78 3.85 5.87 5.87 0 0 0 1.74 3.52c.54.59.86.94.98 1.89.13.95-.1 1.37-.46 2.08-.43.83-1.03 1.96-.78 3.85a5.88 5.88 0 0 0 1.74 3.52c.53.59.86.94.98 1.89a1.5 1.5 0 1 0 2.97-.39 5.88 5.88 0 0 0-1.74-3.52c-.53-.59-.85-.94-.98-1.89-.12-.95.1-1.37.47-2.08.43-.83 1.02-1.96.78-3.85-.25-1.88-1.11-2.83-1.74-3.52-.54-.58-.86-.94-.98-1.89-.12-.94.1-1.37.46-2.07.24-.45.52-1 .7-1.72 5.3-.9 8.85-4.64 10.88-6.78l.08-.08.78-.81c.25-.26.53-.52.8-.78l.1-.08c2.08-1.98 5.7-5.43 6.7-10.55.22.4.46.8.74 1.18.5.68 1.22 1.18 1.9 1.68.78.55 1.6 1.13 1.76 1.74.11.43-.19 1.29-.46 2.04-.35 1-.75 2.13-.63 3.29.13 1.27.81 2.37 1.41 3.35.37.6.84 1.36.84 1.64a5.2 5.2 0 0 1-1.02 2.94c-.59.94-1.33 2.1-1.48 4.33a8.32 8.32 0 0 0 .87 4.5c.4.88.72 1.57.62 3.05-.1 1.48-.5 2.12-1.02 2.94-.6.94-1.33 2.11-1.48 4.34a8.36 8.36 0 0 0 .85 4.51c.38.88.7 1.58.64 3.06a1.5 1.5 0 0 0 1.44 1.55h.06c.8 0 1.47-.63 1.5-1.44a8.84 8.84 0 0 0-.9-4.38 5.5 5.5 0 0 1-.6-3.1c.1-1.47.51-2.12 1.02-2.94a8.32 8.32 0 0 0 1.48-4.34 8.32 8.32 0 0 0-.87-4.5c-.4-.87-.72-1.57-.62-3.04zm-11.13-30.1A9.53 9.53 0 0 1 61.81 34c0 4.93-3.45 8.2-5.73 10.37l-.09.08-.88.85-.85.88-.08.1C52 48.54 48.73 52 43.8 52a9.53 9.53 0 0 1-4.99-1.33l-1.01-.6-1.02.6A9.53 9.53 0 0 1 31.8 52c-4.94 0-8.2-3.45-10.37-5.73l-.09-.09-.85-.88-.88-.85-.09-.08c-2.28-2.17-5.72-5.44-5.72-10.37 0-1.83.43-3.46 1.33-4.98l.6-1.02-.6-1.02A9.53 9.53 0 0 1 13.81 22c0-4.94 3.44-8.2 5.72-10.37l.1-.08c.3-.29.6-.57.87-.85l.85-.88.09-.1C23.6 7.46 26.87 4 31.8 4c1.83 0 3.46.44 4.98 1.33l1.02.6 1.01-.6A9.53 9.53 0 0 1 43.81 4c4.93 0 8.2 3.45 10.37 5.73l.08.09.85.88.88.85.09.08c2.28 2.17 5.73 5.43 5.73 10.37 0 1.83-.44 3.46-1.34 4.98l-.6 1.02.6 1.02z"
+                                    />
+                                    <path d="M44.21 29a5.93 5.93 0 1 0 .01 11.86A5.93 5.93 0 0 0 44.21 29z" />
+                                    <path d="M56.8 22c0-3.3-3.05-5.6-5.22-7.77C49.4 12.06 47.1 9 43.8 9c-3 0-3 2-6 2s-3-2-6-2c-3.3 0-5.6 3.06-7.77 5.23-2.18 2.18-5.23 4.47-5.23 7.77 0 3 2 3 2 6s-2 3-2 6c0 3.3 3.05 5.6 5.23 7.77C26.2 43.94 28.5 47 31.8 47c3 0 3-2 6-2s3 2 6 2c3.3 0 5.59-3.06 7.76-5.23 2.18-2.18 5.24-4.47 5.24-7.77 0-3-2-3-2-6s2-3 2-6zM45 17.33a3.17 3.17 0 1 1 0 6.34 3.17 3.17 0 0 1 0-6.34zm-16.23 23a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm.76-12.66a6.5 6.5 0 1 1 .01-13.02 6.5 6.5 0 0 1-.01 13.02zM44.2 42.84a7.93 7.93 0 1 1 .02-15.86 7.93 7.93 0 0 1-.02 15.86z"
+                                    />
+                                    <path d="M29.52 16.67a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z" />
+                                </g>
+                            </svg>
+                        </label>
+                        <input class="class-type" type="radio" name="disease" id="parasite" data-parasite="true">
+                        <label for="parasite">
+                            <h3>Parasite</h3>
+                            <svg viewBox="0 0 41 89" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round"
+                                stroke-miterlimit="1.41">
+                                <path d="M40.4 42.7a44.18 44.18 0 0 0-1.73-5.39c.31-.13.58-.33.8-.6.42-.54.53-1.23.3-1.87a44.32 44.32 0 0 0-3-6.68c.66-.15 1.19-.58 1.45-1.18a1.9 1.9 0 0 0-.2-1.89 31.55 31.55 0 0 0-4.04-4.68c.39-.28.66-.68.77-1.15.13-.6-.01-1.19-.41-1.67a22.99 22.99 0 0 0-7.59-6.01l.25-.94a3.8 3.8 0 0 0-.79-3.46 4.14 4.14 0 0 0-2.9-1.47l.02-.14.83-1.9 2.39-1.58 8.98 1.3 4.13-.25-.12-2-3.92.24L26.07 0l-3.5 2.34-1.13 2.57-.11.76h-1.95l-.06-.49-1.2-2.84L14.62 0 5.07 1.38l-3.92-.23-.11 2 4.12.24 8.99-1.3 2.38 1.59.83 1.9.02.17c-.95.18-1.8.65-2.43 1.4a3.8 3.8 0 0 0-.83 3.41l.23.96a22.89 22.89 0 0 0-7.53 5.87c-.42.5-.57 1.11-.4 1.73.15.6.56 1.08 1.14 1.34l.14.08c-1.47 1.4-2.84 3-4.07 4.78a1.89 1.89 0 0 0-.24 1.75c.17.48.51.85.96 1.09a44.26 44.26 0 0 0-3.01 6.64 1.93 1.93 0 0 0 .57 2.15 44.07 44.07 0 0 0-1.85 5.62c-.14.56-.04 1.14.3 1.61.33.47.81.76 1.38.85.32.05.62.13.91.24-.14.2-.26.41-.32.67-.43 1.71-.76 3.5-.98 5.32a2.02 2.02 0 0 0 1.68 2.2c.07.02.14.05.22.06-.05.12-.1.24-.12.38a33.54 33.54 0 0 0-.59 6.1c0 .97.7 1.8 1.7 1.97l.6.15a29.27 29.27 0 0 0-.08 7.03 2.96 2.96 0 0 0 1.68 2.35c.6.3 1.23.38 1.86.29a34.82 34.82 0 0 0-.08 5.41 2.96 2.96 0 0 0 1.81 2.54c.42.19.86.28 1.31.28l.32-.02c.03 2.7.78 5.33 2.12 7.41a2.1 2.1 0 0 0 2.29.87 2 2 0 0 0 1.52-1.93v-2.68c0-1.1.98-2 2.18-2h2.31c1.2 0 2.18.9 2.18 2v2.68a2 2 0 0 0 1.52 1.94 2.06 2.06 0 0 0 2.29-.87 14.22 14.22 0 0 0 2.13-7.63l-.02-.47a3.2 3.2 0 0 0 1.8-.3 2.96 2.96 0 0 0 1.7-2.54 34.6 34.6 0 0 0-.13-4.64 3.2 3.2 0 0 0 1.36-.33 2.97 2.97 0 0 0 1.68-2.36 29.97 29.97 0 0 0-.02-6.54l.6-.34c.7-.34 1.12-1 1.13-1.77v-.32c0-2.01-.18-4.01-.52-5.95-.04-.2-.11-.38-.2-.56.15-.05.3-.1.47-.14a2 2 0 0 0 1.58-2.18 44 44 0 0 0-.97-5.34c-.06-.27-.2-.5-.35-.7.2-.08.39-.15.6-.2.53-.13.99-.46 1.27-.93.27-.45.35-.98.22-1.49zm-2.58-7.22l-.58.02h-.12c-.48.02-.94.07-1.4.14l-.15.03c-.48.08-.95.2-1.42.34l-.08.03c-.48.16-.95.34-1.41.56l-.04.02c-.47.23-.92.49-1.37.78l-.1-.03a34.78 34.78 0 0 0-1.39-.43c-3-.88-6.1-1.33-9.25-1.35h-.19c-4.02 0-7.96.7-11.8 2.08-.38-.3-.77-.57-1.18-.81l-.12-.06a10.8 10.8 0 0 0-3.9-1.33l-.1-.01c.8-2.23 1.76-4.35 2.86-6.32l.07.06c.22.2.43.4.6.64.11.15.24.27.39.39l.14.1a2.07 2.07 0 0 0 1.06.34l.12.01c.14 0 .28-.01.42-.04a67.46 67.46 0 0 1 23.21-.15c.13.02.27.03.4.03l.1-.01.2-.02c.11-.02.22-.04.33-.08l.18-.06c.11-.04.21-.1.31-.16l.15-.09c.14-.1.26-.22.38-.35.14-.18.3-.34.47-.49l.16-.13.18-.13c1.13 2.02 2.1 4.2 2.87 6.48zM16.2 10.71l-.15-.61c-.14-.61 0-1.17.41-1.66a2.15 2.15 0 0 1 1.72-.77h4.75c.71 0 1.3.26 1.73.78.42.5.55 1.07.39 1.68l-.16.63-.41-.14-.14-.05c-.58-.2-1.16-.36-1.75-.5l-.18-.04c-.6-.13-1.2-.25-1.8-.32l-.13-.02-.12.02c-.6.07-1.2.18-1.79.32l-.15.03a19.37 19.37 0 0 0-1.85.53l-.37.12zm2.42 1.36l.33-.08c.5-.11 1.02-.21 1.53-.28.52.07 1.04.17 1.55.29l.36.09c.49.12.98.26 1.46.43l.04.01a20.45 20.45 0 0 1 8.87 6.29c-.2.1-.4.22-.58.35l-.05-.04-.6.5-.09.07c-.15.12-.29.26-.43.4l-.23.22c-.2.22-.4.44-.56.69l-.08.02h-.1c-.72-.21-1.46-.4-2.2-.56-.49-.11-.99-.2-1.48-.28l-.75-.14c-.54-.08-1.09-.13-1.63-.19l-.65-.06c-.52-.05-1.04-.06-1.56-.08-.26 0-.51-.02-.77-.03h-.33c-.49 0-.97.02-1.45.04l-.44.01c-.62.04-1.23.1-1.85.16l-.38.04c-.62.08-1.23.18-1.84.29l-.37.06c-.73.14-1.45.3-2.16.5a1.5 1.5 0 0 1-.38.05c-.37 0-.72-.15-.96-.42a6.68 6.68 0 0 0-.72-.68l-.13-.12-.75-.6-.06.07c-.27-.15-.55-.3-.85-.4a19.97 19.97 0 0 1 10.29-6.62zm-9.33 9.7l.04-.02h.01c.81.91 2.13 1.3 3.36.97a30.9 30.9 0 0 1 8.4-1.03c2.85.04 5.7.46 8.37 1.26.2.07.42.1.64.1.23 0 .44-.05.65-.11l.08-.03c.17-.06.33-.14.48-.25l.1-.06c.16-.13.3-.27.43-.43a4.87 4.87 0 0 1 .43-.52l.04-.04h.02a27.08 27.08 0 0 1 3.98 4.6c-.2.05-.4.12-.59.18l-.04-.07-.82.39a7.08 7.08 0 0 0-2.3 1.77c0 .01-.04.04-.14.04a67.88 67.88 0 0 0-17.84-.69c-2.08.2-4.13.48-6.14.85-.03 0-.08 0-.1-.04A6.25 6.25 0 0 0 7.8 28l-.17-.16a6.4 6.4 0 0 0-.59-.49L7 27.32c-.25-.18-.5-.35-.77-.5l-.85-.45-.06.11-.04-.02a29.38 29.38 0 0 1 4.02-4.7zm17.1 64.56c-.03.02-.06.02-.07.02h-.07v-2.68c0-2.2-1.87-4-4.18-4h-2.3a4.1 4.1 0 0 0-4.19 4v2.66h-.13a12.2 12.2 0 0 1-1.8-7.2l.25-.16a13.25 13.25 0 0 1 1-.55l.2-.1.88-.38.04-.02c1.34-.52 2.78-.84 4.25-.96h.06a15.4 15.4 0 0 1 2.74.05l.2.02c.51.06 1.02.15 1.52.26l.23.06c.5.12.99.26 1.46.43l.2.08a14.26 14.26 0 0 1 1.45.63c.04.43.06.87.06 1.3 0 2.4-.64 4.73-1.8 6.54zm5.28-9.94a.96.96 0 0 1-.58.84c-.37.18-.76.17-1.1-.02l-.45-.24-.3-.15-.45-.24-.5-.22-.49-.22-.47-.18-.54-.19-.46-.14-.58-.17-.47-.1c-.19-.05-.38-.1-.58-.13l-.5-.09-.57-.08-.62-.07-.46-.04a18.4 18.4 0 0 0-2.38.01l-.57.06-.69.08c-.23.03-.45.08-.68.13l-.54.1c-.24.05-.48.12-.71.18l-.5.13-.67.23c-.16.06-.33.1-.49.17l-.62.27-.5.22-.56.3-.53.28-.5.3-.48.31-.13.09c-.35.24-.77.28-1.17.1-.27-.11-.6-.35-.63-.84a33.25 33.25 0 0 1 .17-6.09l.14-.06.53-.22.73-.3.6-.22a23.3 23.3 0 0 1 3.4-.92l.68-.12.75-.1.63-.1.89-.07.52-.04a26.99 26.99 0 0 1 2.9 0l.5.04c.31.03.63.05.94.09l.6.08c.28.04.56.07.83.12l.63.12.78.16.64.17.75.2.62.2c.25.07.49.15.73.24l.61.23.7.29.6.26.42.2a32.58 32.58 0 0 1 .18 5.17zm2.92-7.46a.96.96 0 0 1-.57.78c-.36.18-.75.18-1.1 0l-.01-.01-.04-.02-.58-.28-.8-.38-.54-.22-.91-.37-.48-.16c-.33-.11-.67-.23-1.01-.33-.14-.05-.3-.08-.44-.12l-1.08-.3-.47-.1-1.1-.22-.5-.07-1.07-.16c-.25-.03-.5-.04-.76-.06l-.85-.08a28.09 28.09 0 0 0-3.19 0l-.62.06c-.31.02-.62.04-.93.08-.25.02-.5.07-.76.1l-.78.11-.78.16-.74.15-.77.2-.73.19-.72.23a22.87 22.87 0 0 0-1.43.5l-.74.3-.65.3-.43.19-.47.23v.01l-.12.06c-.36.19-.74.19-1.1.01a.96.96 0 0 1-.58-.78 27.73 27.73 0 0 1 0-6.04l.1.06c.33.2.65.42.94.67a2.1 2.1 0 0 0 2.01.4 35.23 35.23 0 0 1 10.62-1.58c4.27 0 8.5.73 12.2 2.13.17.06.34.1.5.12h.1l.16.02c.1 0 .19-.02.29-.03l.08-.01c.34-.06.66-.2.93-.42l.04-.03a27.18 27.18 0 0 1-.12 4.71zm1.2-14.34c.34 1.82.5 3.7.5 5.59l-.01.2-.01-.07-1.36 1-.09.07a9.1 9.1 0 0 0-.46.38l-.28.24c-.23.22-.45.45-.65.68-.02.02-.03.03-.06.03l-.05-.01a38.79 38.79 0 0 0-24.23-.6c-.3-.25-.61-.48-.94-.7l-.33-.2-.58-.32-.3-.15a2.04 2.04 0 0 0-.73-.27c-.54-.19-1.1-.35-1.68-.46a30 30 0 0 1 .57-5.73h.09c.25.16.48.32.7.5l.19.17c.22.2.43.41.6.64a2.1 2.1 0 0 0 2.24.74 42.08 42.08 0 0 1 11.49-1.57c4.12 0 8.12.57 11.9 1.7.2.05.4.08.61.08h.04a2.1 2.1 0 0 0 1.12-.37l.1-.07c.16-.12.3-.26.42-.42.18-.25.4-.48.63-.7l.1-.08c.13-.12.28-.23.44-.34l.03.04zm-1.14-1.7l-.17.1c-.16.12-.3.25-.45.39l-.2.16c-.23.22-.45.45-.66.72l-.18.23-.1.02v.01a43.91 43.91 0 0 0-12.48-1.77c-4.15 0-8.2.56-12.03 1.64l-.1-.01-.08-.1-.24-.28-.15-.18-.03-.03-.08-.08-.13-.12a7.15 7.15 0 0 0-1.08-.86c-.1-.05-.17-.12-.26-.17l-.05-.02a8.52 8.52 0 0 0-2.85-1.04c.2-1.73.52-3.44.92-5.08h.13l.03.04c.1.1.18.22.26.33l.09.1c.1.16.2.32.28.48a2.1 2.1 0 0 0 2.33 1.08c3.73-.87 7.63-1.3 11.58-1.3 4.95 0 9.75.67 14.28 2 .17.05.34.07.51.07l.09.02.1-.02c.14 0 .29-.03.43-.07.1-.02.19-.06.28-.1l.24-.11.22-.14a2.1 2.1 0 0 0 .69-.94 3.97 3.97 0 0 1 .85-1.43l.07.06c.4 1.64.71 3.35.89 5.08-1.1.25-2.1.72-2.95 1.32zm.49-7.77l-.06.05-.05.06a5.97 5.97 0 0 0-1.13 1.97v.01l-.1.02a52.74 52.74 0 0 0-17.92-2c-3.06.17-6.08.6-9.06 1.25a6 6 0 0 0-.4-.7l-.15-.19a6.2 6.2 0 0 0-.36-.45l-.05-.06-.06-.05A6.48 6.48 0 0 0 2 43.07a41.86 41.86 0 0 1 1.8-5.47l.2.05.38.1a8.64 8.64 0 0 1 1.7.71c.1.06.21.1.3.17.32.18.61.38.9.6a2.14 2.14 0 0 0 1.29.45h.15l.11-.02c.16-.02.32-.05.48-.11.42-.16.85-.3 1.28-.44a32.07 32.07 0 0 1 20 .18c.15.05.3.08.45.1h.1l.15.02.12-.02c.12 0 .24-.03.36-.06a2.02 2.02 0 0 0 .7-.3c.34-.23.7-.43 1.06-.61l.38-.16c.25-.11.5-.22.76-.3l.46-.14.75-.17c.16-.03.32-.06.48-.07.08-.02.17-.02.26-.02.73 1.79 1.35 3.67 1.8 5.6a6.52 6.52 0 0 0-3.27 1.96z"
+                                    fill-rule="nonzero" />
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <button>Start Game</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <svg viewBox="0 0 100 53" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round"
             stroke-miterlimit="1.41">
             <!-- Americas -->
@@ -35,7 +86,7 @@
             <path class="region" id="oceania" d="M97.92 39.66l.23 2.16-2.4 2.24 1.55.15 1.39-2.08 1.08-1.46-.7-.08-1.15-.93zM89 31.88l-.25 2-1.7-.61.32-1.09-1.86-.15-2.4 2.24-2.54.92.62 3.46-.23.7.93.53 3.77-.93 1.46.85.7-.39.46 1.4 1.92.54 1.4-.85.76-4.15-2.08-2.08L89 31.88zm2.28.15l-.69-1.46-3.16-1.54-1.62.15 2.08 2.16 1.2.08.5-.47 1.7 1.08z"
             />
             <!-- Europe -->
-            <path class="region" id="britain-ireland-scotland-wales" d="M46.4 7.22v2.25l1.55-.69.44-.68-1.69-3.25-1 .69.07.87-.94 1.13-.06 1.18h1.12l.5-1.5z"
+            <path class="region" id="britain,-ireland,-scotland-&-wales" d="M46.4 7.22v2.25l1.55-.69.44-.68-1.69-3.25-1 .69.07.87-.94 1.13-.06 1.18h1.12l.5-1.5z"
                 fill-rule="nonzero" />
             <path class="region" id="greenland" d="M35.53 2.28l-1.73-.47-2.15 2.3 2.76 7.18 1.3.32.11-2.33.89-.55.05-.89.9-1.7-.63-1.3-1.5-2.56z"
                 fill-rule="nonzero" />
@@ -78,9 +129,45 @@
                 <ul></ul>
             </div>
         </section>
+        <!-- Where world info and stats appear -->
+        <section class="world-info wrapper">
+            <label for="world-input">World</label>
+            <input type="checkbox" id="world-input">
+            <i class="fas fa-chevron-down"></i>
+            <div class="world-container row">
+                <div class="world-stats">
+                    <h3>Global Stats</h3>
+                    <div class="alive"></div>
+                    <div class="healthy"></div>
+                    <div class="infected"></div>
+                    <div class="dead"></div>
+                </div>
+                <div class="vaccine-status">
+                    <h3>Vaccine Status</h3>
+                    <div class="vaccine-status"></div>
+                    <div class="vaccine-completion"></div>
+                    <div class="vaccine-deployment"></div>
+                </div>
+                <div class="row">
+                    <div class="third">
+                        <h3>Clean</h3>
+                        <div class="clean-regions"></div>
+                    </div>
+                    <div class="third">
+                        <h3>infected</h3>
+                        <div class="infected-regions"></div>
+                    </div>
+                    <div class="third">
+                        <h3>Forsaken</h3>
+                        <div class="dead-regions"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Where disease info/stats are displayed. -->
         <!-- Most purchaseable items exist here -->
-        <section class="disease-info">
+        <section class="disease-info wrapper">
             <label for="disease-input">Disease</label>
             <input type="checkbox" id="disease-input">
             <i class="fas fa-chevron-up"></i>
@@ -91,124 +178,138 @@
                     </div>
                     <div class="container row">
                         <div class="tier1">
-                            <button class="sneezing" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1" data-lethality="0" data-purchased="false">
+                            <button class="purchase sneezing" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1" data-lethality="0"
+                                data-purchased="false">
                                 <p>Sneezing</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="coughing" data-buy="7" data-sell="4" data-infectivity="1.5" data-visibility="1.5" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase coughing" data-buy="7" data-sell="4" data-infectivity="1.5" data-visibility="1.5" data-lethality="0"
+                                data-purchased="false">
                                 <p>Coughing</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="fever" data-buy="7" data-sell="4" data-infectivity=".75" data-visibility="1.2" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase fever" data-buy="7" data-sell="4" data-infectivity=".75" data-visibility="1.2" data-lethality="0"
+                                data-purchased="false">
                                 <p>Fever</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="sweating" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1.2" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase sweating" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1.2" data-lethality="0"
+                                data-purchased="false">
                                 <p>Sweating</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="sores" data-buy="8" data-sell="3" data-infectivity="2" data-visibility="2" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase sores" data-buy="8" data-sell="3" data-infectivity="2" data-visibility="2" data-lethality="0" data-purchased="false">
                                 <p>Sores</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="vomiting" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase vomiting" data-buy="7" data-sell="4" data-infectivity="1" data-visibility="1" data-lethality="0"
+                                data-purchased="false">
                                 <p>Vomiting</p>
                                 <div class="symptomInfo"></div>
                             </button>
                         </div>
-    
+        
                         <div class="tier2">
-                            <button class="kidney-failure" data-buy="14" data-sell="7" data-infectivity="0" data-visibility="0" data-lethality="5" data-purchased="false">
+                            <button class="purchase kidney-failure" data-buy="14" data-sell="7" data-infectivity="0" data-visibility="0" data-lethality="5"
+                                data-purchased="false">
                                 <p>Kidney Failure</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="hemorrhaging" data-buy="15" data-sell="8" data-infectivity="3" data-visibility="3" data-lethality="2" data-purchased="false">
+        
+                            <button class="purchase hemorrhaging" data-buy="15" data-sell="8" data-infectivity="3" data-visibility="3" data-lethality="2"
+                                data-purchased="false">
                                 <p>Hemorrhaging</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="ataxia" data-buy="5" data-sell="10" data-infectivity="1" data-visibility="2" data-lethality="0" data-purchased="false">
+        
+                            <button class="purchase ataxia" data-buy="5" data-sell="10" data-infectivity="1" data-visibility="2" data-lethality="0" data-purchased="false">
                                 <p>Ataxia</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="pulmonary-edema" data-buy="12" data-sell="5" data-infectivity="1.5" data-visibility="2" data-lethality="2" data-purchased="false">
+        
+                            <button class="purchase pulmonary-edema" data-buy="12" data-sell="5" data-infectivity="1.5" data-visibility="2" data-lethality="2"
+                                data-purchased="false">
                                 <p>Pulmonary Edema</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="cysts" data-buy="13" data-sell="6" data-infectivity="3" data-visibility="3" data-lethality="1" data-purchased="false">
+        
+                            <button class="purchase cysts" data-buy="13" data-sell="6" data-infectivity="3" data-visibility="3" data-lethality="1" data-purchased="false">
                                 <p>Cysts</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
-                            <button class="necrosis" data-buy="15" data-sell="8" data-infectivity="2" data-visibility="3" data-lethality="3" data-purchased="false">
+        
+                            <button class="purchase necrosis" data-buy="15" data-sell="8" data-infectivity="2" data-visibility="3" data-lethality="3"
+                                data-purchased="false">
                                 <p>Necrosis</p>
                                 <div class="symptomInfo"></div>
                             </button>
-    
+        
                         </div>
                         <div class="tier3">
-                            <button class="encephalitis" data-buy="25" data-sell="16" data-infectivity="0" data-visibility="3" data-lethality="8" data-purchased="false">
+                            <button class="purchase encephalitis" data-buy="25" data-sell="16" data-infectivity="0" data-visibility="3" data-lethality="8"
+                                data-purchased="false">
                                 <p>Encephalitis</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            
-                            <button class="heart-failure" data-buy="25" data-sell="16" data-infectivity="0" data-visibility="4" data-lethality="9" data-purchased="false">
+        
+                            <button class="purchase heart-failure" data-buy="25" data-sell="16" data-infectivity="0" data-visibility="4" data-lethality="9"
+                                data-purchased="false">
                                 <p>Heart Failure</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            
-                            <button class="insanity" data-buy="23" data-sell="14" data-infectivity="4" data-visibility="4" data-lethality="2" data-purchased="false">
+        
+                            <button class="purchase insanity" data-buy="23" data-sell="14" data-infectivity="4" data-visibility="4" data-lethality="2"
+                                data-purchased="false">
                                 <p>Insanity</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            
-                            <button class="liver-failure" data-buy="22" data-sell="5" data-infectivity="0" data-visibility="4" data-lethality="6" data-purchased="false">
+        
+                            <button class="purchase liver-failure" data-buy="22" data-sell="5" data-infectivity="0" data-visibility="4" data-lethality="6"
+                                data-purchased="false">
                                 <p>Liver Failure</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            
-                            <button class="hypotonia" data-buy="13" data-sell="6" data-infectivity="3" data-visibility="3" data-lethality="1" data-purchased="false">
+                            <button class="purchase hypotonia" data-buy="13" data-sell="6" data-infectivity="3" data-visibility="3" data-lethality="1"
+                                data-purchased="false">
                                 <p>Hypotonia</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            
-                            <button class="spenititus" data-buy="35" data-sell="50" data-infectivity="8" data-visibility="6" data-lethality="9" data-purchased="false">
+        
+                            <button class="purchase spenititus" data-buy="35" data-sell="50" data-infectivity="8" data-visibility="6" data-lethality="9"
+                                data-purchased="false">
                                 <p>Spenititus</p>
                                 <div class="symptomInfo"></div>
                             </button>
                         </div>
                     </div>
                 </div>
-
+        
                 <div class="row">
                     <div class="resistances half">
                         <div class="heading">
                             <h3>Resistances</h3>
                         </div>
                         <div class="container">
-                            <button class="coldResist" data-buy="10" data-sell="0" data-coldResist="2" data-purchased="false">
+                            <button class="purchase coldResist" data-buy="10" data-sell="0" data-coldResist="2" data-purchased="false">
                                 <p>Cold Resistance</p>
                                 <div class="symptomInfo"></div>
                             </button>
         
-                            <button class="heatResist" data-buy="10" data-sell="0" data-heatResist="2" data-purchased="false">
+                            <button class="purchase heatResist" data-buy="10" data-sell="0" data-heatResist="2" data-purchased="false">
                                 <p>Heat Resistance</p>
                                 <div class="symptomInfo"></div>
                             </button>
-                            <button class="moistureResist" data-buy="10" data-sell="0" data-moistureResist="2" data-purchased="false">
+                            <button class="purchase moistureResist" data-buy="10" data-sell="0" data-moistureResist="2" data-purchased="false">
                                 <p>Moisture Resistance</p>
                                 <div class="symptomInfo"></div>
                             </button>
-            
-                            <button class="drugResist" data-buy="10" data-sell="0" data-drugResist="2" data-purchased="false">
+        
+                            <button class="purchase drugResist" data-buy="10" data-sell="0" data-drugResist="2" data-purchased="false">
                                 <p>Drug Resistance</p>
                                 <div class="symptomInfo"></div>
                             </button>
@@ -221,35 +322,35 @@
                             <h3>Transmission</h3>
                         </div>
                         <div class="container">
-                            <button class="airborne" data-buy="10" data-sell="0" data-airborne="false" data-purchased="false">
+                            <button class="purchase airborne" data-buy="10" data-sell="0" data-airborne="false" data-purchased="false">
                                 <p>Airborne</p>
                                 <div class="symptomInfo"></div>
                             </button>
         
-                            <button class="waterborne" data-buy="10" data-sell="0" data-waterborne="false" data-purchased="false">
+                            <button class="purchase waterborne" data-buy="10" data-sell="0" data-waterborne="false" data-purchased="false">
                                 <p>Waterborne</p>
                                 <div class="symptomInfo"></div>
                             </button>
         
-                            <button class="rodent" data-buy="10" data-sell="0" data-rodent="false" data-purchased="false">
+                            <button class="purchase rodent" data-buy="10" data-sell="0" data-rodent="false" data-purchased="false">
                                 <p>Rodent</p>
                                 <div class="symptomInfo"></div>
                             </button>
         
-                            <button class="insect" data-buy="10" data-sell="0" data-insect="false" data-purchased="false">
+                            <button class="purchase insect" data-buy="10" data-sell="0" data-insect="false" data-purchased="false">
                                 <p>Insect</p>
                                 <div class="symptomInfo"></div>
                             </button>
                         </div>
                     </div>
                 </div>
-    
+        
                 <div class="traits">
                     <div class="heading">
                         <h3>Traits</h3>
                     </div>
                     <div class="container">
-    
+        
                     </div>
                 </div>
                 <div class="disease-stats">
@@ -260,12 +361,6 @@
                         <div class="row">
                             <div class="evolution-points">
                                 <h4>Evolution Points</h4>
-                            </div>
-                            <div class="avg-infections">
-                                <h4>Infections/day</h4>
-                            </div>
-                            <div class="avg-deaths">
-                                <h4>Deaths/day</h4>
                             </div>
                         </div>
                     </div>

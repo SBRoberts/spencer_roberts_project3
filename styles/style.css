@@ -145,6 +145,11 @@ ul {
 input[type="checkbox"] {
   display: none; }
 
+.wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 80%; }
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -169,13 +174,98 @@ input[type="checkbox"] {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-color: #333;
-  max-width: 100vw;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(99%, #333), color-stop(1%, #4d4d4d)) center repeat-y;
+  background: -webkit-linear-gradient(bottom, #333 99%, #4d4d4d 1%) center repeat-y;
+  background: -o-linear-gradient(bottom, #333 99%, #4d4d4d 1%) center repeat-y;
+  background: linear-gradient(to top, #333 99%, #4d4d4d 1%) center repeat-y;
+  background-size: 100vw 10vh;
+  width: 100vw;
   height: 100vh;
-  padding: 2rem 2rem; }
+  padding: 3rem; }
   #game-window svg {
     max-width: 100vmax;
     max-height: 100%; }
+
+.home-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: -webkit-gradient(linear, left bottom, right top, from(#333), to(crimson));
+  background: -webkit-linear-gradient(bottom left, #333, crimson);
+  background: -o-linear-gradient(bottom left, #333, crimson);
+  background: linear-gradient(to top right, #333, crimson);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: silver;
+  text-transform: uppercase;
+  z-index: 999;
+  overflow: scroll; }
+  .home-screen .container {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  .home-screen .row {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .home-screen label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 4vmax;
+    margin: 2rem;
+    border: 4px solid #333;
+    -webkit-transition: background .3s;
+    -o-transition: background .3s;
+    transition: background .3s; }
+    .home-screen label h3 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #333; }
+    .home-screen label:hover svg {
+      fill: silver; }
+  .home-screen svg {
+    height: 10vh;
+    fill: #333;
+    -webkit-transition: fill .3s;
+    -o-transition: fill .3s;
+    transition: fill .3s; }
+  .home-screen input {
+    display: none; }
+    .home-screen input:checked + label {
+      background-color: silver; }
+      .home-screen input:checked + label h3 {
+        color: crimson; }
+      .home-screen input:checked + label svg {
+        fill: crimson; }
+  .home-screen button {
+    padding: 1rem !important; }
 
 .region-info {
   display: -webkit-box;
@@ -191,8 +281,6 @@ input[type="checkbox"] {
   border: 4px solid #333; }
   .region-info .region-name {
     width: 100%; }
-  .region-info div {
-    width: 50%; }
 
 .region {
   fill: silver;
@@ -203,75 +291,86 @@ input[type="checkbox"] {
   .region:hover {
     fill: crimson; }
 
-.disease-info {
+.disease-info, .world-info {
   position: absolute;
   bottom: 0; }
-  .disease-info label {
+  .disease-info label, .world-info label {
+    position: relative;
     padding: .5rem 1rem;
-    font-size: 30px;
+    font-size: 1.2rem;
     width: 100%;
     height: 100%;
+    cursor: pointer;
     background: silver;
     -webkit-transition: height .3s;
     -o-transition: height .3s;
     transition: height .3s; }
-  .disease-info .disease-container {
+  .disease-info .disease-container, .disease-info .world-container, .world-info .disease-container, .world-info .world-container {
     height: 0;
     max-height: 0;
     overflow: hidden;
-    -webkit-transition: max-height .3s, height .3s;
-    -o-transition: max-height .3s, height .3s;
-    transition: max-height .3s, height .3s; }
-  .disease-info .fa-chevron-up {
+    padding: 0;
+    -webkit-transition: max-height .3s, height .3s, padding 1.2s;
+    -o-transition: max-height .3s, height .3s, padding 1.2s;
+    transition: max-height .3s, height .3s, padding 1.2s; }
+  .disease-info .fa-chevron-up, .disease-info .fa-chevron-down, .world-info .fa-chevron-up, .world-info .fa-chevron-down {
     position: absolute;
     right: 1rem;
-    top: 1.4rem;
+    top: 1.2rem;
     -webkit-transform-origin: center;
     -ms-transform-origin: center;
     transform-origin: center;
     -webkit-transform: rotate(0deg) translateY(-50%);
     -ms-transform: rotate(0deg) translateY(-50%);
     transform: rotate(0deg) translateY(-50%);
-    -webkit-transition: -webkit-transform .3s;
-    transition: -webkit-transform .3s;
-    -o-transition: transform .3s;
-    transition: transform .3s;
-    transition: transform .3s, -webkit-transform .3s;
+    -webkit-transition: top .3s, -webkit-transform .3s;
+    transition: top .3s, -webkit-transform .3s;
+    -o-transition: transform .3s, top .3s;
+    transition: transform .3s, top .3s;
+    transition: transform .3s, top .3s, -webkit-transform .3s;
     font-size: 1.5rem; }
-    .disease-info .fa-chevron-up path {
+    .disease-info .fa-chevron-up path, .disease-info .fa-chevron-down path, .world-info .fa-chevron-up path, .world-info .fa-chevron-down path {
       fill: #333; }
-  .disease-info input:checked + .fa-chevron-up {
+  .disease-info input:checked + .fa-chevron-up, .disease-info input:checked + .fa-chevron-down, .world-info input:checked + .fa-chevron-up, .world-info input:checked + .fa-chevron-down {
     -webkit-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
-    top: .8rem; }
-    .disease-info input:checked + .fa-chevron-up + .disease-container {
+    top: .4rem; }
+    .disease-info input:checked + .fa-chevron-up + .disease-container, .disease-info input:checked + .fa-chevron-up + .world-container, .disease-info input:checked + .fa-chevron-down + .disease-container, .disease-info input:checked + .fa-chevron-down + .world-container, .world-info input:checked + .fa-chevron-up + .disease-container, .world-info input:checked + .fa-chevron-up + .world-container, .world-info input:checked + .fa-chevron-down + .disease-container, .world-info input:checked + .fa-chevron-down + .world-container {
       height: 100%;
-      max-height: 1000px; }
-  .disease-info div {
+      max-height: 87vh;
+      padding: 1rem;
+      z-index: 999;
+      mix-blend-mode: color-burn; }
+  .disease-info div, .world-info div {
     height: 100%; }
-  .disease-info button {
-    color: silver;
-    background: #333;
-    border: 2px solid transparent;
-    outline: none;
-    margin: .5rem;
-    padding: 1rem .25rem;
-    width: calc(100% / 6);
-    -webkit-transition: color .2s, border .2s, background-color .2s;
-    -o-transition: color .2s, border .2s, background-color .2s;
-    transition: color .2s, border .2s, background-color .2s;
-    font-size: 1rem; }
-    .disease-info button:hover {
-      border: 2px solid crimson;
-      background: silver;
-      color: #333; }
-    .disease-info button p {
-      margin: 0; }
-    .disease-info button.purchased {
-      position: relative;
-      background-color: crimson;
-      color: silver; }
+
+.world-info {
+  bottom: initial;
+  top: 0; }
+
+button {
+  color: silver;
+  background: #333;
+  border: 2px solid transparent;
+  outline: none;
+  margin: .33rem;
+  padding: .66rem .25rem;
+  width: calc(100% / 6);
+  -webkit-transition: color .2s, border .2s, background-color .2s;
+  -o-transition: color .2s, border .2s, background-color .2s;
+  transition: color .2s, border .2s, background-color .2s;
+  font-size: 1rem; }
+  button:hover {
+    border: 2px solid crimson;
+    background: silver;
+    color: #333; }
+  button p {
+    margin: 0; }
+  button.purchased {
+    position: relative;
+    background-color: crimson;
+    color: silver; }
 
 .symptoms {
   display: -webkit-box;
@@ -301,12 +400,24 @@ input[type="checkbox"] {
   flex-wrap: wrap;
   border: 2px solid #333;
   margin: .5rem;
-  width: 40%; }
+  width: 40%;
+  padding: .5rem 1rem; }
   .resistances button, .transmission button {
-    min-width: 45%; }
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 45%;
+    flex: 1 0 45%; }
 
 .container {
-  width: 100%; }
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
 
 .game-over, .winner {
   position: absolute;
@@ -330,8 +441,8 @@ input[type="checkbox"] {
   background: -o-linear-gradient(bottom left, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7));
   background: linear-gradient(to top right, rgba(220, 20, 60, 0.7), rgba(192, 192, 192, 0.7)); }
 
-.region-info, .disease-info {
-  background: rgba(192, 192, 192, 0.7);
+.region-info, .disease-info, .world-info {
+  background: rgba(192, 192, 192, 0.85);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -339,11 +450,13 @@ input[type="checkbox"] {
   flex-wrap: wrap;
   width: 90%;
   max-height: 100vh; }
-  .region-info .fa-window-close, .region-info .fa-chevron-down, .disease-info .fa-window-close, .disease-info .fa-chevron-down {
+  .region-info .fa-window-close, .disease-info .fa-window-close, .world-info .fa-window-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
     cursor: pointer; }
+  .region-info h3, .disease-info h3, .world-info h3 {
+    margin: .5rem 0; }
 
 .region-info {
   position: absolute; }
