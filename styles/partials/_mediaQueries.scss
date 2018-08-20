@@ -1,0 +1,56 @@
+/* Portrait tablet and small desktops */
+@media (max-width: 940px) {}
+/* Landscape phone to portrait tablet */
+@media (max-width: 768px){
+    body{
+        // transform: rotate(90deg);
+    }
+    .row{
+        .third{
+            width: 100%;
+        }
+    }
+    .home-screen{
+        label{
+            margin: .5rem ;
+        }
+        h2{
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .world.info, .disease-info{
+        h3{
+            margin: 0.5rem 0;
+        }
+        button{
+            font-size: .6rem;
+            padding: .5rem;
+        }
+        .row{
+            display: flex;
+            justify-content: center;
+            .half{
+                width: 45%;
+            }
+            .third{
+                h4{
+                    // margin: 10px 0;
+                }
+            }
+        }
+    }
+    .region-info{
+        // margin: 5rem 0;
+        max-height: 60%;
+        overflow: scroll;
+        justify-content: space-between;
+    }
+}
+/* Landscape phones and down */
+// CSS applied when the device is in portrait mode
+@media (max-width: 480px) and (orientation:portrait) {
+    .portrait-detected{
+        display: flex;
+    }
+}

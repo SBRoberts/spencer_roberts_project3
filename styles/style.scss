@@ -32,6 +32,12 @@ input[type="checkbox"]{
     .half{
         width: 48%;
     }
+    .third{
+        width: 33%;
+        h4{
+            width: 50%;
+        }
+    }
 }
 
 #game-window{
@@ -39,7 +45,7 @@ input[type="checkbox"]{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to top, $darkShade 99%, hsl(0, 0%, 30%) 1%) center repeat-y;
+    background: linear-gradient(to top, $darkShade 97%, hsl(0, 0%, 30%) 3%) center repeat-y;
     background-size: 100vw 10vh;
     width: 100vw;
     height: 100vh;
@@ -81,20 +87,22 @@ input[type="checkbox"]{
         align-items: center;
         flex-wrap: wrap;
         position: relative;
-        padding: 4vmax;
-        margin: 2rem;
+        padding: 2vw;
+        margin: .5rem 2rem;
         border: 4px solid $darkShade;
-        transition: background .3s;
+        color: $darkShade;
+        transition: background .3s, color .3s, border .3s;
         h3{
             width: 100%;
             text-align: center;
-            margin-bottom: 3rem;
-            color: $darkShade;
+            margin: 0rem 0 3rem;
         }
         &:hover{
             svg{
                 fill: $lightShade;
             }
+            color: $lightShade;
+            border-color: $lightShade;
         }
     }
     svg{
@@ -102,11 +110,27 @@ input[type="checkbox"]{
         fill: $darkShade;
         transition: fill .3s;
     }
-    input{
+    input[type=text]{
+        background: transparent;
+        border: 0;
+        outline: 0;
+        color: $lightShade;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $lightShade;
+        border-radius: 0;
+        transition: font-size .3s;
+        &:focus{
+            font-size: 1.5rem;
+        }
+    }
+    input[type="radio"]{
         display: none;
         &:checked{
             + label {
                 background-color: $lightShade;
+                border-color: $lightShade;
                 h3{
                     color: $highlight;
                 }
@@ -118,6 +142,12 @@ input[type="checkbox"]{
     }
     button{
         padding: 1rem !important;
+        width: 33%;
+        &:hover{
+            border-color: $lightShade;
+            color: $highlight;
+
+        }
     }
 }
 
@@ -143,6 +173,7 @@ input[type="checkbox"]{
     fill: silver;
     z-index: 100;
     transition: fill .2s ease-in-out;
+    cursor: pointer;
     &:hover{
         fill: $highlight;
     }
@@ -150,10 +181,7 @@ input[type="checkbox"]{
 
 .disease-info, .world-info{
     position: absolute;
-    // width: 100%;
     bottom: 0;
-    // left: 5rem;
-    // right: 5rem;
     label{
         position: relative;
         padding: .5rem 1rem;
@@ -162,7 +190,14 @@ input[type="checkbox"]{
         height: 100%;
         cursor: pointer;
         background: rgba($color: $lightShade, $alpha: 1);
-        transition: height .3s;
+        transition: height .3s, background .3s, color .3s;
+        &:hover{
+            background: $highlight;
+            color: $lightShade;
+            + input + svg path{
+                fill: $lightShade !important;
+            }
+        }
     }
     .disease-container, .world-container{
         height: 0;
@@ -180,7 +215,8 @@ input[type="checkbox"]{
         transition: transform .3s, top .3s;
         font-size: 1.5rem;
         path{
-            fill: $darkShade   ;
+            fill: $darkShade;
+            transition: fill .3s;
         }
     }
     input:checked{
@@ -189,9 +225,10 @@ input[type="checkbox"]{
             top: .4rem;
             + .disease-container, + .world-container{
                 height: 100%;
-                max-height: 87vh;
+                max-height: 88vh;
                 padding: 1rem;
                 z-index: 999;
+                overflow: scroll;
                 mix-blend-mode: color-burn;
             }
         }
@@ -294,6 +331,13 @@ button{
         top: 1rem;
         right: 1rem;
         cursor: pointer;
+        path{
+            fill: $darkShade;
+            transition: fill .2s ease-in-out;
+        }
+        &:hover path{
+            fill: $highlight;
+        }
     }
     h3{
         margin: .5rem 0;
@@ -303,3 +347,77 @@ button{
 .region-info{
     position: absolute;
 }
+.world-info{
+    h4{
+        font-size: 1rem;
+        margin: .75rem 0;
+    }
+    .infected-regions, .clean-regions, .dead-regions{
+        display: flex;
+        flex-wrap: wrap;
+        h4{
+            font-size: .75rem;
+            margin: .5rem 0;
+        }
+    }
+}
+.global-event{
+    font-size: 1rem;
+    color: $darkShade !important;
+    background: $lightShade;
+    margin: .5rem 0;
+    padding: .5rem;
+    mix-blend-mode: color-burn;
+    text-decoration: line-through;
+    &.global-event--active{
+        color: $lightShade !important;
+        background-color: $highlight;
+        text-decoration: initial;
+    }
+}
+
+.vaccine-status{
+    display: flex;
+    flex-wrap: wrap;
+    h3{
+        width: 100%;
+    }
+}
+.outer-bar{
+    display: flex;
+    align-items: center;
+    min-height: 2rem;
+    margin: .5rem 0;
+    width: 100%;
+    background: $darkShade;
+    padding: 5px;
+    transition: width .3s;
+    .inner-bar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 0%;
+        height: 2rem;
+        align-self: stretch;
+        background: $highlight;
+        color: $lightShade;
+    }
+}
+
+.portrait-detected {
+    position: absolute;
+    padding: 2rem;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba($color: $highlight, $alpha: .7);
+    color: $lightShade;
+    z-index: 999;
+
+}
+
+@import './partials/mediaQueries';
