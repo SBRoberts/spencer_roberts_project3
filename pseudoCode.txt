@@ -16,6 +16,13 @@
 //      (oh boy...)
 // 4. call the world update function | 
 
+// Building purchasable items
+// 1. hard code each purchasable item in the dom as buttons
+// 1.1 in JS, on button click, get the retrive evoPts data tag value and subtract from current amt
+// 1.2 if evoPts >= currnt pts get item.val() and use it to turn its disease value to true
+// 1.3 call function that contains if statements for each item
+// ** program all "user-selectable" things as items, set the cost to 0 if need be. 
+
 // Every tick
 // 1. scan each region
 // 1.1.connectedRegions
@@ -41,3 +48,11 @@
 //         - when completion rate reaches 100, start deployment
 //         - when deployment reaches 100 the user gets 10 days to try to win.
 
+// ** calc chance to spread/infect region based on new chance prop on region
+// **
+
+// INTRO SCREEN
+// 1. create form
+// 2. make 3 radio buttons that change corresponding trait in disease obj to true
+// 3. make a text input for user's disese name
+// 4 on form submit, apply class traits, set disease name to input.val() and form.hide()
